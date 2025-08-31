@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Responsive Snake Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #AFCD00;
+      color: white;
+      height: 100svh;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+      text-shadow: 2px 2px #1e1f26;
+    }
+
+    #top-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    #scoreboard {
+      font-size: 1.2rem;
+      color: #eaffd0;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #game-board {
+      display: grid;
+      width: 80vw;
+      height: 60vh;
+      border: 4px solid #3C74FF;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .cell {
+      width: 100%;
+      height: 100%;
+    }
+
+    .snake {
+      background-color: #3C74FF !important;
+      border-radius: 6px;
+    }
+
+    .snake-head {
+      background-color: #3C74FF !important;
+      position: relative;
+      border-radius: 6px;
+    }
+
+    .eye {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: white;
+      border-radius: 50%;
+      top: 6px;
+      left: 5px;
+    }
+
+    .eye::after {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background-color: black;
+      border-radius: 50%;
+      top: 1px;
+      left: 1px;
+    }
+
+    .eye.right {
+      left: 13px;
+    }
+
+    .food {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #3C74FF;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background-color: #2c5cdd;
+      transform: scale(1.05);
+    }
+
+    #game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ff6b6b;
+      font-weight: bold;
+      font-size: 2rem;
+      text-shadow: 1px 1px #000;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 12px 24px;
+      border-radius: 10px;
+      display: none;
+      z-index: 1;
+    }
+
+    #play-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 16px 32px;
+      font-size: 1.8rem;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 2;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    #play-box:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    #play-box::after {
+      content: attr(title);
+      display: block;
+      font-size: 1rem;
+      color: #ccc;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Snake Game</h1>
+  <div id="top-bar">
+    <button onclick="resetGame()">Restart</button>
+    <div id="scoreboard">Score: <span id="score">0</span></div>
+    <button id="pause-btn" onclick="togglePause()">Pause</button>
+  </div>
+
+  <div id="game-board">
+    </div>
+
+  <script>
+    const board = document.getElementById("game-board");
+    const scoreDisplay = document.getElementById("score");
+    const pauseBtn = document.getElementById("pause-btn");
+
+    // These will be selected after the board is created
+    let gameOverEl;
+    let playBox;
+
+    let snake = [];
+    let direction = { x: 0, y: 0 };
+    let food = null;
+    let interval = null;
+    let paused = false;
+    let gameOver = false;
+    let started = false;
+    let score = 0;
+    let COLS = 20, ROWS = 20;
+
+    function updateBoardSize() {
+      COLS = Math.floor(board.clientWidth / 20);
+      ROWS = Math.floor(board.clientHeight / 20);
+      board.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
+      board.style.gridTemplateRows = `repeat(${ROWS}, 1fr)`;
+    }
+
+    function createBoard() {
+      board.innerHTML = '';
+      
+      const gameOverDiv = document.createElement("div");
+      gameOverDiv.id = "game-over";
+      gameOverDiv.textContent = "Game Over!";
+      board.appendChild(gameOverDiv);
+
+      const playBoxDiv = document.createElement("div");
+      playBoxDiv.id = "play-box";
+      playBoxDiv.title = "Press any arrow key to start";
+      playBoxDiv.textContent = "Play";
+      board.appendChild(playBoxDiv);
+
+      // We need to re-select these elements after they are created
+      gameOverEl = document.getElementById("game-over");
+      playBox = document.getElementById("play-box");
+
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+          const div = document.createElement("div");
+          div.classList.add("cell");
+          board.appendChild(div);
+        }
+      }
+    }
+
+    function getCell(x, y) {
+      // Adjusted index to account for the play and game over divs
+      return board.children[y * COLS + x + 2]; 
+    }
+
+    function draw() {
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+          const cell = getCell(x, y);
+          if (!cell) continue;
+          cell.className = "cell";
+          cell.innerHTML = "";
+          cell.style.backgroundColor = (x + y) % 2 === 0 ? "#AFCD00" : "#A4C500";
+        }
+      }
+
+      for (let i = 0; i < snake.length; i++) {
+        const part = snake[i];
+        const cell = getCell(part.x, part.y);
+        if (!cell) continue;
+        cell.classList.add(i === 0 ? "snake-head" : "snake");
+
+        if (i === 0) {
+          const eyeLeft = document.createElement("div");
+          eyeLeft.classList.add("eye");
+          const eyeRight = document.createElement("div");
+          eyeRight.classList.add("eye", "right");
+          cell.appendChild(eyeLeft);
+          cell.appendChild(eyeRight);
+        }
+      }
+
+      if (food) {
+        const foodCell = getCell(food.x, food.y);
+        if (foodCell) {
+          foodCell.classList.add("food");
+          foodCell.innerHTML = "🍎";
+        }
+      }
+    }
+
+    function move() {
+      if (paused || gameOver) return;
+
+      const newHead = {
+        x: snake[0].x + direction.x,
+        y: snake[0].y + direction.y,
+      };
+
+      if (
+        newHead.x < 0 || newHead.x >= COLS ||
+        newHead.y < 0 || newHead.y >= ROWS ||
+        snake.some((part) => part.x === newHead.x && part.y === newHead.y)
+      ) {
+        clearInterval(interval);
+        gameOverEl.style.display = "block";
+        gameOver = true;
+        return;
+      }
+
+      snake.unshift(newHead);
+
+      if (food && newHead.x === food.x && newHead.y === food.y) {
+        score++;
+        updateScore();
+        placeFood();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function placeFood() {
+      let newFood;
+      do {
+        newFood = {
+          x: Math.floor(Math.random() * COLS),
+          y: Math.floor(Math.random() * ROWS),
+        };
+      } while (snake.some((part) => part.x === newFood.x && part.y === newFood.y));
+      food = newFood;
+    }
+
+    function updateScore() {
+      scoreDisplay.textContent = score;
+    }
+
+    function resetGame() {
+      updateBoardSize();
+      createBoard(); // Create the board and its elements
+      
+      snake = [{ x: Math.floor(COLS / 2), y: Math.floor(ROWS / 2) }];
+      direction = { x: 0, y: 0 };
+      score = 0;
+      started = false;
+      paused = false;
+      gameOver = false;
+      clearInterval(interval);
+      updateScore();
+      
+      placeFood();
+      draw();
+      
+      // Ensure the correct visibility
+      gameOverEl.style.display = "none";
+      playBox.style.display = "block";
+    }
+
+    function togglePause() {
+      if (!started || gameOver) return;
+      paused = !paused;
+      pauseBtn.textContent = paused ? "Resume" : "Pause";
+    }
+
+    function handleKey(e) {
+      if (gameOver) return;
+
+      const keyMap = {
+        ArrowUp: { x: 0, y: -1 },
+        ArrowDown: { x: 0, y: 1 },
+        ArrowLeft: { x: -1, y: 0 },
+        ArrowRight: { x: 1, y: 0 },
+      };
+
+      const newDir = keyMap[e.key];
+      if (!newDir) return;
+
+      if (
+        (newDir.x === -direction.x && direction.x !== 0) ||
+        (newDir.y === -direction.y && direction.y !== 0)
+      ) return;
+
+      if (!started) {
+        direction = newDir;
+        started = true;
+        interval = setInterval(move, 200);
+        playBox.style.display = "none";
+      } else {
+        direction = newDir;
+      }
+    }
+
+    window.addEventListener("keydown", handleKey);
+    window.addEventListener("resize", () => {
+      resetGame();
+    });
+
+    // Initial setup
+    updateBoardSize();
+    resetGame();
+  </script>
+</body>
+</html>

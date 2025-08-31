@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="mainpage.html"/>
+    <link rel="stylesheet" href="pdf.css">
+    
+    <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+    
+  </head >
+  <body onload="reload()" onscroll="Fix()">
+    <header id="Header">
+      <div class="logo">
+        <a href="mainpage.html">
+          <img src="/Images/logo.png" class="image"/>
+        </a>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <nav>
+        <ul class="options">
+          <li class="l"><a href="bookshelf.html" class="navi">Bookshelf</a></li>
+          <li class="l"><a href="calendar.html" class="navi">Calendar</a></li>
+          <li class="l"><a href="portfolioForm.html" class="navi">Portifolio</a></li>
+          <li class="l"><a href="bookswap.html" class="navi">Bookswap</a></li>
+          <li class="l"><a href="pdf.html" class="navi active">Vault</a></li>
+        </ul>
+      </nav>
+      <div class="toggle-switch">
+        <input class="toggle-input" id="toggle" type="checkbox">
+        <label class="toggle-label" for="toggle"></label>
+      </div>
+      <div class="user" id="user">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="profile">
+        <div class="back">
+          <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:black"></i>
+        </div>
+        <div class="userprofile">
+          <div class="user u">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="name"> </div>
+          <div class="email"> </div>
+          <br/>
+        </div>      
+        <a href="Motivation2.html" class="relax">
+          <div class="relaxnav"></div>
+          <div class="relaxcont"> Switch to <br/> Relax Mode </div>
+        </a>
+        <a href="homepage.html" class="logout"> Logout </a>
+      </div>
+  </header>
+    
+  <h1 style="color:purple;margin:2rem 0 0 0;">Vault</h1>
+  <div class="main-content">
+    <div class="card-container" id="cardContainer">
+      <div class="card plus" onclick="document.getElementById('fileInput').click()">
+        <i class="fa fa-plus"></i>
+      </div>
+    </div>
+    <input type="file" id="fileInput" onchange="handleFile(event)"/>
+  </div>
+
+
+  <div id="premiumModal" class="modal">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Get Premium</h2>
+      <p>You’ve reached the limit of 6 files. Upgrade to Premium to add more!</p>
+      <button onclick="alert('Premium Feature Coming Soon')">Upgrade</button>
+    </div>
+  </div>
+
+
+
+
+  <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p> &copy; 2025 <span style="color:#E82166;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+    <script src="pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script>
+      displayUserInfo('username', 'email');
+    </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("toggle");
+
+      // Step 1: Set toggle based on mode
+      const currentPage = window.location.pathname;
+      if (currentPage.includes("Motivation2.html")) {
+        localStorage.setItem("relaxMode", "true");
+        toggle.checked = true;
+      } else if (currentPage.includes("bookshelf.html")) {
+        localStorage.setItem("relaxMode", "false");
+        toggle.checked = false;
+      }
+
+      // Step 2: When toggle changes, redirect
+      toggle.addEventListener("change", function () {
+        if (this.checked) {
+          window.location.href = "Motivation2.html";
+        } else {
+          window.location.href = "bookshelf.html";
+        }
+      });
+    });
+  </script>
+  </body>
+</html>

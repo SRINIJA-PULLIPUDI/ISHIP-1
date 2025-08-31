@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flying Bird Game</title><link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #87ceeb, #fff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #0ff;
+      color: #000;
+      border: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .score {
+      background: #ff0;
+      color: #000;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+    }
+
+    #game {
+      position: relative;
+      width: 320px;
+      height: 500px;
+      background: #ccf7ff;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .bird {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 200px;
+      left: 80px;
+      background: yellow;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: inset 0 0 0 2px black;
+    }
+
+    .bird::before,
+    .bird::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 20px;
+      background: red;
+      top: 10px;
+      border-radius: 50%;
+    }
+
+    .bird::before {
+      left: -8px;
+      transform: rotate(-30deg);
+    }
+
+    .bird::after {
+      right: -8px;
+      transform: rotate(30deg);
+    }
+
+    .pipe {
+      position: absolute;
+      width: 50px;
+      background: green;
+    }
+
+    .pipe.top {
+      top: 0;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .pipe.bottom {
+      bottom: 0;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      font-size: 24px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    @media (max-width: 400px) {
+      #game {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button id="restart">🔁 Restart</button>
+    <div class="score">Score: <span id="score">0</span></div>
+    <button id="pause">⏸️ Pause</button>
+  </div>
+
+  <div id="game">
+    <div class="bird" id="bird">🐤</div>
+    <div class="game-over" id="game-over">Game Over</div>
+  </div>
+
+  <script>
+    const bird = document.getElementById("bird");
+    const game = document.getElementById("game");
+    const restartBtn = document.getElementById("restart");
+    const pauseBtn = document.getElementById("pause");
+    const scoreEl = document.getElementById("score");
+    const gameOverText = document.getElementById("game-over");
+
+    let birdTop = 200;
+    let gravity = 2;
+    let isPaused = false;
+    let score = 0;
+    let gameStarted = false;
+    let gameInterval, pipeInterval;
+
+    function startGame() {
+      if (gameStarted) return;
+      gameStarted = true;
+      gameOverText.style.display = "none";
+      gameInterval = setInterval(updateGame, 20);
+      pipeInterval = setInterval(createPipes, 1500);
+    }
+
+    function updateGame() {
+      if (isPaused) return;
+
+      birdTop += gravity;
+      bird.style.top = birdTop + "px";
+
+      document.querySelectorAll(".pipe").forEach(pipe => {
+        let pipeLeft = parseInt(pipe.style.left);
+        pipeLeft -= 2;
+        pipe.style.left = pipeLeft + "px";
+
+        if (pipeLeft + 50 < 0) {
+          pipe.remove();
+          if (pipe.classList.contains("top")) score++;
+        }
+
+        // Collision
+        if (isColliding(bird, pipe)) {
+          endGame();
+        }
+      });
+
+      if (birdTop >= game.clientHeight - 40 || birdTop <= 0) {
+        endGame();
+      }
+
+      scoreEl.textContent = score;
+    }
+
+    function createPipes() {
+      const gap = 120;
+      const topHeight = Math.floor(Math.random() * 200) + 50;
+      const bottomHeight = game.clientHeight - topHeight - gap;
+
+      const topPipe = document.createElement("div");
+      topPipe.classList.add("pipe", "top");
+      topPipe.style.height = topHeight + "px";
+      topPipe.style.left = game.clientWidth + "px";
+
+      const bottomPipe = document.createElement("div");
+      bottomPipe.classList.add("pipe", "bottom");
+      bottomPipe.style.height = bottomHeight + "px";
+      bottomPipe.style.left = game.clientWidth + "px";
+
+      game.appendChild(topPipe);
+      game.appendChild(bottomPipe);
+    }
+
+    function isColliding(bird, pipe) {
+      const bRect = bird.getBoundingClientRect();
+      const pRect = pipe.getBoundingClientRect();
+      return !(
+        bRect.top > pRect.bottom ||
+        bRect.bottom < pRect.top ||
+        bRect.right < pRect.left ||
+        bRect.left > pRect.right
+      );
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      clearInterval(pipeInterval);
+      gameStarted = false;
+      gameOverText.style.display = "block";
+    }
+
+    function resetGame() {
+      clearInterval(gameInterval);
+      clearInterval(pipeInterval);
+      birdTop = 200;
+      bird.style.top = birdTop + "px";
+      document.querySelectorAll(".pipe").forEach(pipe => pipe.remove());
+      score = 0;
+      scoreEl.textContent = "0";
+      gameStarted = false;
+      gameOverText.style.display = "none";
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      pauseBtn.textContent = isPaused ? "▶️ Resume" : "⏸️ Pause";
+    }
+
+    restartBtn.onclick = resetGame;
+    pauseBtn.onclick = togglePause;
+
+    document.addEventListener("keydown", e => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        startGame();
+        birdTop -= 40;
+        bird.style.top = birdTop + "px";
+      }
+    });
+  </script>
+</body>
+</html>

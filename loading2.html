@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+    <title>Game Loading to Main Page</title><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./motivation2abc.css">
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* font-family: 'Comic Sans MS', 'Poppins', cursive, sans-serif; */
+        }
+
+        body {
+            background: #0d0d0d;
+            margin: 0;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            /* overflow: hidden; */
+            /* font-family: 'Fredoka', sans-serif; */
+        }
+
+
+
+/* for loading css */
+.body_for_game_loading {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    /* overflow: hidden; */
+    /* display: block; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bar {
+    border-radius: 10px;
+    filter: blur(1px);
+    rotate: -45deg;
+    margin-right: 8px;
+    display: inline-block;
+}
+marquee {
+    position: absolute;
+}
+.hd{
+    width: 100%;
+    height: 100svh;
+    /* background-color: #FFFEFF;    */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 100;
+}
+.hd1{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hd2{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* top: 36.5%; */
+    /* background-color: black; */
+    overflow: hidden;
+}
+.hd2 .h1{
+    position: relative;
+    font-size: 4rem;
+    color: #e4e4e4;
+    margin: 0px;
+    height: 4.5rem;
+    text-shadow: 1px 3px 1px grey;
+    width: fit-content;
+    display: flex;
+    overflow: hidden;
+}
+.h1 .hd11{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -100%;
+    animation: myani1 .5s linear 1;
+}
+.h1 .hd12{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: -100%;
+    animation: myani2 10s linear infinite;
+}
+@keyframes myani1 {
+    100%{
+        left: 100%;
+    }
+}
+@keyframes myani2 {
+    2.5%{
+        left: 0%;
+    }
+    100%{
+        left: 0%;
+    }
+}
+.hd2 .h2{
+    font-size: 2rem;
+    color: #FFFEFF;
+    text-shadow: 1px 3px 1px grey;
+    margin: 10px;
+    position: relative;
+    text-shadow: 1px 3px 1px grey;
+    width: fit-content;
+    display: flex;
+    height: fit-content;
+    overflow: hidden;
+}
+.h2 .hd21{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -100%;
+    animation: myani1 .5s .15s linear 1;
+}
+.h2 .hd22{
+    /* background-color: yellow; */
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: -100%;
+    animation: myani2 10s .15s linear 1;
+}
+.hd2 .h3{
+    font-size: 4rem;
+    color: #FFFEFF;
+    margin: 0px;
+    height: 4.5rem;
+    text-shadow: 1px 3px 1px grey;
+    overflow: hidden;
+    position: relative;
+    width: fit-content;
+    display: flex;
+    height: fit-content;
+}
+.h3 .hd31{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -100%;
+    animation: myani1 .5s .25s linear 1;
+}
+.h3 .hd32{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: -100%;
+    animation: myani2 10s .25s linear 1;
+}
+
+.underline-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.underline-line {
+  height: 4px;
+  width: 0;
+  background-color: white;
+  border-radius: 10px;
+  animation: underlineGrow 1s ease-out forwards;
+  box-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
+}
+
+@keyframes underlineGrow {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 20%;
+  }
+}
+
+@keyframes timer {
+    50%{
+        display: none;
+    }
+    100%{
+        display: none;
+    }
+}
+
+
+
+.game-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* grid-template-rows: repeat(4,1fr); */
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1000px;
+
+}
+.background_game{
+    z-index: 999;
+    background: linear-gradient(to left, #7819a1, #305e96);
+}
+.game-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #00ffea66;
+    padding: 40px;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: transform 0.3s, background 0.3s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    /* background: #00ffeacc; */
+    background: white;
+    color: black;
+    .g2{
+        display: none;
+        color: white;
+    .g1{
+        z-index: 10;
+        display: block;
+    }
+}
+}
+.g1{
+    position: absolute;
+    color:  #1a1a1a;
+    display: flex;
+    justify-self: center;
+    /* display: none; */
+}
+.g2{
+    position: absolute;
+    display: flex;
+    justify-self: center;
+}
+.height1{
+    height: 1000px;
+    width: 100%;
+}
+
+
+
+/* Footer */
+footer{
+  width:100%;
+  height:300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.des {
+  width:100%;
+  height:80%;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #1a1e1f;
+  border-bottom:2px solid #2d3434;
+  display: flex;
+}
+
+.copy{
+  height:20%;
+  width:100%;
+  background-color:#242a2d;
+  color:white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sec{
+  width:33.3%;
+  height:100%;
+  color:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} 
+
+.f1{
+  margin:3rem 0 0 0;
+}
+
+.footerhead{
+  color:white;
+  font-size: 20px;
+  font-weight: 500px;
+}
+
+.footercont{
+  width:85px;
+  height:70%;
+  margin:1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  text-decoration: none;
+}
+
+.fcont{
+  color:rgb(175, 175, 175);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.font:hover{
+  text-decoration:underline;
+}
+
+.logo1{
+  width:200px;
+  height:100px;
+}
+
+.logocont{
+  font-size: 16px;
+  margin:-1rem 0 0 0;
+  color:rgb(175, 175, 175);
+}
+
+.icons{
+  margin:1rem 0 0 0;
+}
+
+.fa-brands:hover{
+  box-shadow: 0 0 5px 5px;
+}
+
+@keyframes float {
+  0%   { 
+    transform: translateY(0); 
+  }
+  50%  { 
+    transform: translateY(-20px); 
+  }
+  100% { 
+    transform: translateY(0); 
+  }
+}
+
+.float {
+  animation: float 2s ease-in-out infinite;
+}
+
+
+@media (max-width: 500px) {
+
+  footer {
+    height: auto;
+    padding: 1.5rem 0;
+  }
+
+  .des {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .sec {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+
+  .logo1 {
+    width: 140px;
+    height: 70px;
+  }
+
+  .logocont {
+    font-size: 13px;
+    margin-top: 0.4rem;
+  }
+
+  .footerhead {
+    font-size: 17px;
+    margin-top: 0.8rem;
+  }
+
+  .footercont {
+    width: auto;
+    align-items: center;
+  }
+
+  .fcont {
+    font-size: 13px;
+    margin-bottom: 0.4rem;
+  }
+
+  .icons {
+    margin-top: 0.8rem;
+  }
+
+}
+
+@media (max-width: 360px) {
+ 
+
+  .footercont, .logocont {
+    font-size: 14px;
+  }
+
+  .footerhead {
+    font-size: 16px;
+  }
+
+  .copy p {
+    font-size: 12px;
+  }
+
+  .logo1 {
+    width: 150px;
+    height: auto;
+  }
+}
+
+    header {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(to left, #952455, #292160);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-placeholder {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.logo-placeholder img {
+  height: 50px;
+  object-fit: contain;
+}
+
+
+nav {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+nav a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    border: 2px solid #ffffff;
+}
+
+.profile-icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    /* background-image: url("./Images/profile1.png"); */
+    /* background-color: black; */
+    /* background-size: contain; */
+    /* border: 2px solid #fff; */
+    /* color:white; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 42px;
+
+}
+.profile-icon:hover{
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-icon a{
+    text-decoration: none;
+    color: white;
+    /* cursor: pointer; */
+    border-radius: 100%;
+    transition: all 0.3s ease;
+}
+
+body.menu-open .profile-icon {
+  display: none;
+}
+
+
+
+/* Sidebar Styling */
+.user{
+  width:50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:50%;
+  background-color: #8CDCE4;
+  color:#9D3A67;  
+  margin:0 0 0 15rem;
+  font-size: 18px;
+}
+
+.user:hover{
+  background-color: #77c6cd;
+}
+
+.profile{
+  position: fixed;
+  right:-300px;
+  width:250px;
+  height: 350px;
+  border-radius:5px;
+  margin:1rem 0 0 75.6rem;
+  display: flex;
+  flex-direction: column;
+  top:-15px;
+  background-color: #292160;
+  transition: all 0.2s;
+  z-index:9999;
+}
+
+.hidden10{
+  right:0;
+}
+
+.userprofile{
+  margin:7.5px;
+  border-radius: 5px;
+  background-color: #b34b7a;
+  color:white;
+}
+
+.u{
+  margin:10px 0 0 92px;
+}
+
+.name, .email{
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  color:white;
+}
+
+.name{
+  margin:10px 0 0 0;
+}
+
+.email{
+  margin:0 0 0 25px;
+}
+
+.relax{
+  height: 70px;
+  display: flex;
+  margin:1rem 0 0 0;
+  text-decoration: none;
+  color:black;
+  border-bottom:3px solid #994269;
+  border-radius: 10px;
+}
+
+.relaxnav{
+  width:60px;
+  height: 60px;
+  background-image: url('/Images/relaxlogo1.png');
+  border-radius: 50%;
+  border: 3px solid rgb(199, 199, 199);
+  margin:0 0 0 1.5rem
+}
+
+.relaxcont{
+  display: flex;
+  align-items: center;
+  margin:0 0 0 2rem;
+  color:white;
+}
+
+.relax:hover{
+  background-color: #be6e92;
+}
+
+.logout{
+  width:120px;
+  height:50px;
+  cursor: pointer;
+  color:white;
+  font-weight: bold;
+  font-size:17px;
+  border-radius: 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:all 0.5s;
+  background-color: #84c8ce;
+  margin:1.5rem 0 0 1.5rem;
+}
+
+.logout:hover{
+  box-shadow: 0 10px 15px rgb(128, 208, 215);
+  border-radius: 5px;
+}
+
+
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 910px) {
+    .hamburger {
+    display: block;
+    }
+
+    nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    }
+
+    nav.show {
+    display: flex;
+    }
+
+    nav a {
+    padding: 10px 0;
+    width: 100%;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+ <!-- <div class="body_for_game_loading" id="loading"> -->
+
+<div class="body_for_game_loading" id="loading">
+    <div class="hd2">
+        <div class="h1">
+            <div class="hd12">WELCOME</div>
+            <div class="hd11"></div>
+        </div>
+        <div class="h2">
+            <div class="hd22">TO OUR</div>
+            <div class="hd21"></div>
+        </div>
+        <div class="h3">
+            <div class="hd32">GAMES</div>
+            <div class="hd31"></div>
+        </div>
+        <div class="underline-container">
+            <div class="underline-line"></div>
+        </div>
+    </div>
+</div>  
+<!-- GAME PAGE -->
+ <div class="game-page background_game" id="gamePage" >
+   <header>
+    <div class="logo-placeholder">
+        <img src="./Images/logo.png"/>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+    <nav id="navMenu">
+      <a href="./Motivation2.html">Motivation</a>
+      <a href="funfacts2.html">Fun-Facts</a>
+      <a href="Jokes.html">Jokes</a>
+      <a href="./loading_page.html" class="active">Games</a>
+      <a href="./music_page.html">Music</a>
+      <!-- <div class="mobile-profile">
+        <span>Profile</span>
+      </div> -->
+    </nav>
+
+    <!-- <div class="profile-icon" >
+       <a href="./mainpage.html" >Back to Study</a> 
+    </div> -->
+
+
+    <div class="profile-icon" id="user">
+      <i class="fa-solid fa-circle-user" style="color: #8CDCE4;"></i>
+    </div>
+
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="profile">
+      <div class="back">
+        <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:white"></i>
+      </div>
+      <div class="userprofile">
+        <div class="user u">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="name"> </div>
+        <div class="email"> </div>
+        <br/>
+      </div>
+      
+      <a href="mainpage.html" class="relax">
+        <div class="relaxnav"></div>
+        <div class="relaxcont"> Switch to <br/> Study Mode </div>
+      </a>
+      <a href="homepage.html" class="logout"> Logout </a>
+    </div>
+  </header>
+<!-- <div class="game-page background_game" id="gamePage" > -->
+    <!-- <div class="height1"></div> -->
+    <div class="game-grid">
+        <!-- <div class="height1"></div> -->
+        <div class="game-card" onclick="location.href='snake.html'">Snake Game</div>
+        <div class="game-card" onclick="location.href='2048.html'">2048 Game</div>
+        <div class="game-card" onclick="location.href='flyingbird.html'">Flying Bird</div>
+        <div class="game-card" onclick="location.href='memory.html'">Memory Match</div>
+        <div class="game-card " onclick="location.href='#'">
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div>
+         <!-- <div class="game-card " onclick="location.href='#'">
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div>
+         <div class="game-card " onclick="location.href='#'">
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div>
+         <div class="game-card " onclick="location.href='#'">
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div> -->
+        <div class="game-card" onclick="location.href='#'">2048 Game</div>
+        <div class="game-card" onclick="location.href='#'">Flying Bird</div>
+        <div class="game-card" onclick="location.href='#'">Memory Match</div>
+        <div class="game-card" onclick="location.href='#'">Memory Match</div>
+        <div class="game-card" onclick="location.href='#'">Memory Match</div>
+        <div class="game-card" onclick="location.href='#'">Memory Match</div>
+        <div class="game-card" >
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div>
+        <!-- <div class="game-card" >
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div>
+        <div class="game-card" >
+            <div class="g1">Coming soon...</div>
+            <div class="g2">Flying Bird</div>
+        </div> -->
+     
+    </div>
+  <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p> &copy; 2025 <span style="color:#E82166;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+</div>
+<!-- </div> -->
+<script>
+   const colors = ['#9C0D6F', '#0A586B', '#AC5DAF', '#A30057', '#AB5EAF', '#4EB3B1', '#ff007f', '#00e5ff', '#a020f0', '#39ff14', '#ffcc00', '#00ffc3'];
+const totalBars = 200;
+
+for (let i = 0; i < totalBars; i++) {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+
+    const width = Math.floor(Math.random() * 100) + 20;
+    const height = Math.floor(Math.random() * 10) + 5;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    bar.style.width = `${width}px`;
+    bar.style.height = `${height}px`;
+    bar.style.backgroundColor = color;
+
+    const isLightning = Math.random() > 0.5;
+    bar.style.opacity = isLightning ? '0.8' : (Math.random() * 0.3 + 0.2).toFixed(2);
+    bar.style.boxShadow = isLightning ? `0 0 12px ${color}, 0 0 24px ${color}, 0 0 36px ${color}` : `0 0 4px ${color}`;
+
+    const marquee = document.createElement("marquee");
+    const directions = ['left', 'right'];
+    const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+    marquee.setAttribute('direction', randomDirection);
+
+    const scrollAmount = Math.floor(Math.random() * 10) + 8; // Faster speed
+    marquee.setAttribute('scrollamount', `${scrollAmount}`);
+
+    const scrollDelay = Math.floor(Math.random() * 10) + 2;
+    marquee.setAttribute('scrolldelay', `${scrollDelay}`);
+
+    let div = document.querySelector(".body_for_game_loading");
+    const left = Math.floor(Math.random() * div.clientWidth);
+    const top = Math.floor(Math.random() * div.clientHeight);
+    marquee.style.left = `${left}px`;
+    marquee.style.top = `${top}px`;
+    marquee.style.width = `150px`;
+    marquee.style.loop = `2`;
+    marquee.appendChild(bar);
+    document.getElementsByClassName('body_for_game_loading')[0].appendChild(marquee);
+}
+
+
+
+
+    // Trigger transition after 3 seconds
+    setTimeout(() => {
+        cancelAnimationFrame(animationId); // Stop the animation
+        document.getElementById('loading').style.opacity = 0;
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+            const game = document.getElementById('gamePage');
+            game.style.opacity = 1;
+            game.style.pointerEvents = 'auto';
+            // game.style.overflowX = 'hidden';
+            // game.style.overflowY = 'scroll';
+            // This element doesn't exist in your HTML, so it will cause an error.
+            // document.getElementById('bars-container').style.display = 'none';
+            
+            // To remove the bars from the page, you can loop through the array and remove them.
+            bars.forEach(bar => bar.el.remove());
+
+        }, 800);
+    }, 3000);
+    
+ function toggleMenu() {
+      const nav = document.getElementById("navMenu");
+      nav.classList.toggle("show");
+
+    }
+
+
+    function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  nav.classList.toggle("show");
+
+  // ✅ Add/remove class on <body> when menu is toggled
+  if (nav.classList.contains("show")) {
+    document.body.classList.add("menu-open");
+  } else {
+    document.body.classList.remove("menu-open");
+  }
+}
+
+
+
+    const userIcon = document.getElementById('user');
+const sidebar = document.getElementsByClassName('profile')[0];
+const closeArrow = document.getElementsByClassName('back')[0];
+
+userIcon.addEventListener('click', () => {
+    sidebar.classList.add('hidden10');
+});
+
+closeArrow.addEventListener('click', () => {
+    sidebar.classList.remove('hidden10');
+});
+
+document.addEventListener('click', (e) => {
+    if (
+    !sidebar.contains(e.target) && 
+    !userIcon.contains(e.target)
+    ) {
+    sidebar.classList.remove('hidden10');
+    }
+});
+displayUserInfo('username', 'email');
+// function displayUserInfo(usernameId, emailId) {
+//   const user = JSON.parse(localStorage.getItem('currentUser'));
+//   if (!user) {
+//     window.location.href = 'login.html';
+//     return;
+//   }else{
+//     if (usernameId) document.getElementsByClassName('name')[0].innerText = user.username;
+//     if (emailId) document.getElementsByClassName('email')[0].innerText = user.email;
+//     if (usernameId) document.getElementsByClassName('welcomeuser')[0].innerText = user.username;
+//   }
+// }
+
+
+
+</script>
+
+</body>
+</html>

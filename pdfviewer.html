@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading PDF...</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      background-color: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    header {
+      height: 60px;
+      background-color: #5798FF;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    .left-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .back-btn, .ai-chat-btn {
+      background-color: white;
+      color: #5798FF;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .pdf-container {
+      width: 100%;
+      height: calc(100% - 60px);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .chat-box {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      width: 300px;
+      height: 650px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .chat-header {
+      background-color: #5798FF;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+      position: relative;
+    }
+    .chat-header .close-chat {
+      position: absolute;
+      right: 10px;
+      top: 0px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      outline: none;
+    }
+    .chat-input button {
+      background-color: #5798FF;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left-controls">
+      <button class="back-btn" onclick="window.history.back()">&#8592; Back</button>
+      <button class="ai-chat-btn" onclick="toggleChat(event)">
+        <i class="fa-solid fa-robot" style="color:#5798FF"></i> &nbsp;
+        AI Chat
+      </button>
+    </div>
+    <div class="title" id="doc-title">Loading...</div>
+  </header>
+
+  <div class="pdf-container">
+    <iframe id="pdfFrame"></iframe>
+  </div>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      AI Chat
+      <span class="close-chat" onclick="closeChat()">&times;</span>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Ask a question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const title = sessionStorage.getItem('fileTitle') || 'PDF Viewer';
+    const fileUrl = sessionStorage.getItem('fileUrl');
+
+    document.title = title;
+    document.getElementById('doc-title').textContent = title;
+
+    const iframe = document.getElementById('pdfFrame');
+    if (fileUrl) {
+      iframe.src = fileUrl;
+    } else {
+      document.querySelector('.pdf-container').innerHTML = "<p style='text-align:center; padding-top:2rem;'>No file data found. Please go back and try again.</p>";
+    }
+
+    let chatCount = 0;
+    const chatBox = document.getElementById('chatBox');
+    const chatInput = document.getElementById('chatInput');
+
+    function toggleChat(event) {
+      event.stopPropagation();
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+      chatInput.focus();
+    }
+
+    function closeChat() {
+      chatBox.style.display = 'none';
+    }
+
+    function fun(){
+        alert('Premium Feature Coming Soon');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!chatBox.contains(e.target) && !e.target.classList.contains('ai-chat-btn')) {
+        chatBox.style.display = 'none';
+      }
+    });
+
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      const messagesDiv = document.getElementById('chatMessages');
+      messagesDiv.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+
+      chatInput.value = '';
+
+      if (chatCount >= 3) {
+        messagesDiv.innerHTML += `<div style="color:red;"><strong>AI:</strong> You've reached your free limit. <a href='#' onclick="fun()">Get Premium</a> to continue.</div>`;
+        return;
+      }
+
+      setTimeout(() => {
+        messagesDiv.innerHTML += `<div><strong>AI:</strong> I'm an AI chat assistant. I can help with general study doubts.</div>`;
+        chatCount++;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }, 500);
+    }
+  </script>
+</body>
+</html>

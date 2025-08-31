@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Match Game</title>
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to left, #7819a1, #305e96);
+      /* background: #0e0e1f; */
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+
+/* button{
+      border: none;
+      border-radius: 6px;
+      padding: .6rem .6rem;
+      cursor: pointer;
+      cursor: pointer;
+      color:white;
+      font-weight: bold;
+      font-size:17px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:all 0.5s;
+      background-color: #6eb7be;
+    }
+
+    button:hover{
+      box-shadow: 0 10px 15px rgb(110, 188, 195);
+      border-radius: 5px;
+    } */
+
+    button {
+      /* background: #0ff; */
+      background-color: #6eb7be;
+      /* color: #000; */
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      box-shadow: 0 10px 15px rgb(110, 188, 195);
+      transform: scale(1.1);
+    }
+
+    .score {
+      /* background: #ff0; */
+      background-color: rgba(201, 198, 198, 0.4);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      /* color: #000; */
+      color: white;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 12px;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      grid-gap: 12px;
+      justify-content: center;
+    }
+
+    .card {
+      width: 80px;
+      height: 80px;
+      background: #222;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+      user-select: none;
+      position: relative;
+    }
+
+    .card.revealed,
+    .card.matched {
+      background: white;
+      /* background: #0ff; */
+      color: #000;
+      font-weight: bold;
+      transform: scale(1.05);
+    }
+
+    .card.matched {
+      /* background: rgb(181, 221, 181); */
+      background: rgb(164, 218, 78);
+      /* background: #80ACFF; */
+    }
+
+    @media (max-width: 500px) {
+      .game-board {
+        grid-template-columns: repeat(4, 60px);
+        grid-gap: 10px;
+      }
+
+      .card {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+
+      button, .score {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button style="position: absolute; left: 20px; top: 22px;">
+    <strong style="position: relative; top: -1px">&#11013;</strong>
+    <a href="./loading_page.html" style="text-decoration: none; color: white">Back</a>
+  </button>
+  <div class="controls">
+    <!-- <button id="restart">🔁 Restart</button>
+    <div class="score">Score: <span id="score">0</span></div>
+    <button id="pause">⏸️ Pause</button> -->
+     <button id="restart">Restart</button>
+    <div class="score">Score: <span id="score">0</span></div>
+    <button id="pause">Pause</button>
+  </div>
+
+  <div class="game-board" id="game-board"></div>
+
+  <script>
+    const board = document.getElementById("game-board");
+    const scoreEl = document.getElementById("score");
+    const restartBtn = document.getElementById("restart");
+    const pauseBtn = document.getElementById("pause");
+
+    const emojis = ['🍎', '🍌', '🍇', '🍓', '🍒', '🍉', '🍋', '🥝'];
+    let cardValues = [...emojis, ...emojis]; // 8 pairs
+    let flipped = [];
+    let lockBoard = false;
+    let matchedPairs = 0;
+    let score = 0;
+    let paused = false;
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    function createBoard() {
+      board.innerHTML = "";
+      shuffle(cardValues);
+      cardValues.forEach((emoji, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.value = emoji;
+        card.dataset.index = index;
+        board.appendChild(card);
+      });
+
+      revealAllBriefly();
+    }
+
+    function revealAllBriefly() {
+      document.querySelectorAll('.card').forEach(card => {
+        card.classList.add("revealed");
+        card.textContent = card.dataset.value;
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.card').forEach(card => {
+          card.classList.remove("revealed");
+          card.textContent = "";
+        });
+      }, 1500);
+    }
+
+    function updateScore() {
+      scoreEl.textContent = score;
+    }
+
+    function handleCardClick(e) {
+      if (paused || lockBoard) return;
+
+      const card = e.target;
+      if (!card.classList.contains("card") || card.classList.contains("revealed") || card.classList.contains("matched")) return;
+
+      card.classList.add("revealed");
+      card.textContent = card.dataset.value;
+      flipped.push(card);
+
+      if (flipped.length === 2) {
+        lockBoard = true;
+        const [first, second] = flipped;
+
+        if (first.dataset.value === second.dataset.value) {
+          first.classList.add("matched");
+          second.classList.add("matched");
+          matchedPairs++;
+          score++;
+          updateScore();
+          flipped = [];
+          lockBoard = false;
+          if (matchedPairs === emojis.length) {
+            setTimeout(() => alert("🎉 You won!"), 300);
+          }
+        } else {
+          setTimeout(() => {
+            first.classList.remove("revealed");
+            second.classList.remove("revealed");
+            first.textContent = "";
+            second.textContent = "";
+            flipped = [];
+            lockBoard = false;
+          }, 800);
+        }
+      }
+    }
+
+    function restartGame() {
+      score = 0;
+      matchedPairs = 0;
+      flipped = [];
+      lockBoard = false;
+      updateScore();
+      createBoard();
+    }
+
+    function togglePause() {
+      paused = !paused;
+      pauseBtn.textContent = paused ? "▶️ Resume" : "⏸️ Pause";
+    }
+
+    board.addEventListener("click", handleCardClick);
+    restartBtn.addEventListener("click", restartGame);
+    pauseBtn.addEventListener("click", togglePause);
+
+    createBoard();
+  </script>
+</body>
+</html>

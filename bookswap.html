@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Book Swap</title>
+    <link rel="stylesheet" href="bookswapcss.css">
+    <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+   
+</head>
+<body>
+
+    <div class="form-overlay" id="formOverlay">
+        <div class="form-container">
+            <span class="close-btn" onclick="closeForm()"><i class="fa-regular fa-circle-xmark"></i></span>
+            <h2 style="color: white;text-shadow: 0px 0px 4px white;">Add your Book</h2>
+            <form id="addBookForm">
+                <div class="input-container">
+                    <input type="text" id="bookTitle" required style="color: rgb(255, 191, 255);" />
+                    <label style="color: white;text-shadow: 0px 0px 4px white;">Enter Book Title</label>
+                    <span class="underline"></span>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="bookAuthor" required style="color: rgb(255, 191, 255);" />
+                    <label style="color: white;text-shadow: 0px 0px 4px white;">Author</label>
+                    <span class="underline"></span>
+                </div>
+                
+                <div class="dropdown-row">
+                    <select id="bookSemester" required>
+                        <option value="" disabled selected> Semester</option>
+                        <option value="1st">1st Sem</option>
+                        <option value="2nd">2nd Sem</option>
+                        <option value="3rd">3rd Sem</option>
+                        <option value="4th">4th Sem</option>
+                        <option value="5th">5th Sem</option>
+                        <option value="6th">6th Sem</option>
+                        <option value="7th">7th Sem</option>
+                        <option value="8th">8th Sem</option>
+                        <option value="others">Others</option>
+                    </select>
+
+                    <select id="bookBranch" required>
+                        <option value="" disabled selected> Branch</option>
+                        <option value="CSE">CSE</option>
+                        <option value="IT">IT</option>
+                        <option value="ECE">ECE</option>
+                        <option value="EEE">EEE</option>
+                        <option value="MECH">MECH</option>
+                        <option value="CIVIL">CIVIL</option>
+                        <option value="AIML">AIML</option>
+                        <option value="DS">Data Science</option>
+                        <option value="others">Others</option>
+                    </select>
+
+                    <select id="bookCategory" required>
+                        <option value="" disabled selected> Category</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Law">Law</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Management">Management</option>
+                        <option value="Science">Science</option>
+                        <option value="others">Others</option>
+                    </select>
+                 </div>
+
+
+                <input type="file" id="bookImageUpload" accept="image/*" style="display: none;" />
+                <label for="bookImageUpload" class="upload-box">
+                    <i class="fas fa-upload"></i>
+                    Upload Book Image
+                </label>
+                <div id="imagePreview" style="margin-top: 10px; text-align: center;"></div>
+
+                <div class="radiobuttons">
+                    <label>
+                        <input type="radio" name="bookOption" value="sell" />
+                        <span class="radio-option">Sell</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="bookOption" value="rent" />
+                        <span class="radio-option">Rent</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="bookOption" value="free" checked />
+                        <span class="radio-option">Free</span>
+                    </label>
+                </div>
+                <div id="dynamicField"></div>
+
+                <input type="number" id="bookDescription" placeholder="Contact No">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="book-details-overlay" id="bookDetailsOverlay">
+        <div class="book-details-card">
+            <span class="close-btn" onclick="closeBookDetails()"><i class="fa-regular fa-circle-xmark"></i></span>
+            <img id="detailBookImage" src="" alt="Book Cover" class="detail-book-img"/>
+            <h2 id="detailBookTitle"></h2>
+            <p><strong>Author:</strong> <span id="detailBookAuthor"></span></p>
+            <p><strong>Category:</strong> <span id="detailBookCategory"></span></p>
+            <p><strong>Semester:</strong> <span id="detailBookSemester"></span></p>
+            <p><strong>Branch:</strong> <span id="detailBookBranch"></span></p>
+            <p id="detailBookPrice"></p>
+            <p><strong>Description:</strong> <span id="detailBookDescription"></span></p>
+            <p><strong>Email:</strong> <span id="detailUploaderEmail"></span></p> <button class="det interest-button">Request Book</button>
+            <button class="det interest-button">Add to Cart!</button>
+            <div class="empty">
+                <div class="swapped">Swapped</div>
+                <div class="available" style="background-color: rgb(6, 74, 6);">Available</div>
+                <div class="inreq">In request</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="usebox1" id="useBox">
+        <section>
+            <i style="font-size: 25px;" class="arrow fa-solid fa-arrow-right" onclick="closePanel()"></i>
+        </section>
+        <div class="main" id="panelContent">
+        </div>
+    </div>
+
+    <header>
+        <div class="logolearnoha">
+            <a href="mainpage.html">
+                <img src="/Images/logo.png" class="imagelearnoha"/>
+            </a>
+        </div>
+        <div class="header-text">
+            <a class="flds a" href="mainpage.html">Home</a>
+            <div class="flds addbook" onclick="openFormOverlay()">Add Book</div>
+            <div class="flds" onclick="openPanel('messages')">Notifications</div>
+            <div class="flds" onclick="openPanel('mybooks')">My Books</div>
+            <div class="flds" onclick="openPanel('cart')">Cart</div>
+            
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <div class="toggle-switch">
+            <input class="toggle-input" id="toggle" type="checkbox">
+            <label class="toggle-label" for="toggle"></label>
+        </div>
+
+        
+        <div class="user" id="user">
+           <i class="fa-solid fa-user"></i>
+        </div>
+        
+        <div class="profile">
+            <div class="back">
+                <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:black"></i>
+            </div>
+            <div class="userprofile">
+                <div class="user u">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="name"> </div>
+                <div class="email"> </div>
+                <br/>
+            </div>
+            
+            <a href="Motivation2.html" class="relax">
+                <div class="relaxnav"></div>
+                <div class="relaxcont"> Switch to <br/> Relax Mode </div>
+            </a>
+            <a href="homepage.html" class="logout"> Logout </a>
+        </div>
+
+
+    </header>
+
+
+    <div id="mobileMenu">
+        <div class="flds addbook" onclick="openFormOverlay()">Add Book</div>
+        <div class="flds messages" onclick="openPanel('messages')">Messages</div>
+        <div class="flds mybooks" onclick="openPanel('mybooks')">My Books</div>
+        <div class="flds cart" onclick="openPanel('cart')">Cart</div>
+    </div>
+
+    <main>
+    <div>
+      <h1>Swap your Books....</h1>
+      <p style="text-align: center;">Your Books. Your Campus. Your Marketplace.</p>
+    <div class="aboutbookswap">
+
+          <div class="logo upload">
+            <img src="static/upload.png" alt="">
+            <h2>Upload Your Book</h2>
+            <p>List books to sell or swap with title, condition, and price.</p>
+          </div>
+
+          <div class="logo search">
+            <img src="static/searchlogo.png" alt="">
+            <h2>Browse & Search</h2>
+            <p>Find books by subject, title, or college with ease.</p>
+          </div>
+
+          <div class="logo swap">
+            <img src="static/swappinglogo.png" alt="">
+            <h2>Connect & Swap</h2>
+            <p>Message students, finalize swaps, and grow your library.</p>
+          </div>
+    </div>
+    </div>
+    
+</main>
+
+    <hr>
+
+    <h1 style="text-shadow: 7px 7px 3px rgb(197, 196, 196);">Book Store</h1>
+    <div class="input-container search-container">
+        <input type="text" id="searchInput" required />
+        <label>Search book by title, author...</label>
+        <span class="underline"></span>
+        <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="dropdown-row" style="margin-top: 20px; justify-content: center; background-color: transparent;">
+        <select id="filterSemester" style="height: 40px;">
+            <option value="">All Semesters</option>
+            <option value="1st">1st Sem</option>
+            <option value="2nd">2nd Sem</option>
+            <option value="3rd">3rd Sem</option>
+            <option value="4th">4th Sem</option>
+            <option value="5th">5th Sem</option>
+            <option value="6th">6th Sem</option>
+            <option value="7th">7th Sem</option>
+            <option value="8th">8th Sem</option>
+            <option value="others">Others</option>
+        </select>
+
+        <select id="filterBranch" style="height: 40px;">
+            <option value="">All Branches</option>
+            <option value="CSE">CSE</option>
+            <option value="IT">IT</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECH</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="AIML">AIML</option>
+            <option value="DS">Data Science</option>
+            <option value="others">Others</option>
+        </select>
+
+        <select id="filterCategory" style="height: 40px;">
+            <option value="">All Categories</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Arts">Arts</option>
+            <option value="Medical">Medical</option>
+            <option value="Pharmacy">Pharmacy</option>
+            <option value="Law">Law</option>
+            <option value="Commerce">Commerce</option>
+            <option value="Management">Management</option>
+            <option value="Science">Science</option>
+            <option value="others">Others</option>
+        </select>
+    </div>
+
+    <div class="booksection" id="bookSection">
+    </div>
+    <button onclick="clearBooks()">Clear All Books</button>
+
+ <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p> &copy; 2025 <span style="color:#E82166;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+    <script>
+        let currentPanel = "";
+        let books = []; // Array to store book objects
+        let requests = []; // Initialized as empty, will be filled by loadRequests()
+
+        // --- Utility Functions ---
+
+        // Function to load books from Local Storage
+        function loadBooks() {
+            const storedBooks = localStorage.getItem('books');
+            if (storedBooks) {
+                books = JSON.parse(storedBooks);
+            } else {
+                // Add some dummy books if local storage is empty
+                books = [
+                    /*{
+                        id: 'book_1',
+                        title: 'The Lord of the Rings',
+                        author: 'J.R.R. Tolkien',
+                        category: 'Arts',
+                        semester: 'others',
+                        branch: 'others',
+                        price: '₹500',
+                        type: 'sell',
+                        description: 'Epic fantasy novel.',
+                        image: 'https://placehold.co/200x180/ADD8E6/000000?text=LotR',
+                        isMyBook: false,
+                        uploaderEmail: 'user1@example.com' // ADDED
+                    },
+                    {
+                        id: 'book_2',
+                        title: 'Introduction to Algorithms',
+                        author: 'Thomas H. Cormen',
+                        category: 'Engineering',
+                        semester: '3rd',
+                        branch: 'CSE',
+                        price: '₹800/day',
+                        type: 'rent',
+                        description: 'A comprehensive textbook on algorithms.',
+                        image: 'https://placehold.co/200x180/ADD8E6/000000?text=Algorithms',
+                        isMyBook: true,
+                        uploaderEmail: 'user@example.com' // ADDED
+                    },
+                    {
+                        id: 'book_3',
+                        title: 'Calculus: Early Transcendentals',
+                        author: 'James Stewart',
+                        category: 'Science',
+                        semester: '1st',
+                        branch: 'others',
+                        price: 'Free',
+                        type: 'free',
+                        description: 'Standard calculus textbook.',
+                        image: 'https://placehold.co/200x180/ADD8E6/000000?text=Calculus',
+                        isMyBook: false,
+                        uploaderEmail: 'user2@example.com' // ADDED
+                    }*/
+                ];
+                //saveBooks(); // Save dummy books to local storage
+            }
+        }
+        // Function to save books to Local Storage
+        function saveBooks() {
+            localStorage.setItem('books', JSON.stringify(books));
+        }
+
+        // Function to load requests from Local Storage
+        function loadRequests() {
+            const storedRequests = localStorage.getItem('requests');
+            if (storedRequests) {
+                requests = JSON.parse(storedRequests);
+            } else {
+                requests = [
+                    { id: 'req_1', user: '23mh1a05h0@acoe.edu.in', bookTitle: 'Data Structures Using C++', status: 'pending' },
+                    { id: 'req_2', user: 'jane.doe@example.com', bookTitle: 'Operating Systems', status: 'pending' },
+                    { id: 'req_3', user: 'alice@example.com', bookTitle: 'Web Development Basics', status: 'pending' },
+                    { id: 'req_4', user: 'bob@example.com', bookTitle: 'Linear Algebra', status: 'pending' },
+                    { id: 'req_5', user: 'charlie@example.com', bookTitle: 'Physics for Engineers', status: 'pending' }
+                ];
+                saveRequests();
+            }
+        }
+
+        // Function to save requests to Local Storage
+        function saveRequests() {
+            localStorage.setItem('requests', JSON.stringify(requests));
+        }
+
+        // Function to convert image file to Base64 string
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // --- UI Control Functions ---
+
+        function toggleMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("show");
+        }
+
+        function openFormOverlay() {
+            document.getElementById("formOverlay").style.display = "flex";
+            // Reset form fields and dynamic field when opening
+            document.getElementById('addBookForm').reset();
+            document.getElementById('dynamicField').innerHTML = '';
+            document.getElementById('imagePreview').innerHTML = ''; // Clear image preview
+        }
+
+        function closeForm() {
+            document.getElementById("formOverlay").style.display = "none";
+        }
+
+        function closePanel() {
+            const box = document.getElementById("useBox");
+            box.style.right = "-310px";
+            currentPanel = "";
+        }
+
+        function openmybookscontent() {
+            document.getElementById("mybookscontent").style.display = "block";
+            document.getElementById("requesting").style.display = "none";
+        }
+
+        function openrequestcontent() {
+            document.getElementById("requesting").style.display = "block";
+            document.getElementById("mybookscontent").style.display = "none";
+        }
+
+function handleClick(clickedIcon, action, requestId) {
+    const messageDiv = clickedIcon.closest('.message-div');
+    if (!messageDiv) return;
+
+    if (action === 'reject') {
+        // ... (your existing reject logic) ...
+        messageDiv.remove();
+        requests = requests.filter(req => req.id !== requestId);
+        saveRequests();
+        console.log(`Request ${requestId} rejected and message deleted.`);
+
+        if (requests.length === 0) {
+            document.getElementById('panelContent').innerHTML = `
+                <h2 style="text-align: center;color:white">Messages</h2>
+                <p style="color:white; text-align:center;">No new messages.</p>
+            `;
+        }
+
+    } else if (action === 'accept') {
+        // Apply styling directly to the clicked icon
+        clickedIcon.style.backgroundColor = "green";
+        clickedIcon.style.color = "white"; // Optional: change icon color for better visibility
+        // Optional: prevent further clicks on this specific icon
+        clickedIcon.style.pointerEvents = "none";
+        clickedIcon.style.opacity = "0.6";
+
+        console.log(`Request ${requestId} accepted.`);
+        // You might also want to update the status of this request in your 'requests' array
+        // Example:
+        // const reqIndex = requests.findIndex(req => req.id === requestId);
+        // if (reqIndex !== -1) {
+        //     requests[reqIndex].status = 'accepted';
+        //     saveRequests();
+        // }
+    }
+}
+
+// Remove the separate setRed function as its logic is now integrated.
+// The HTML for the accept icon should also be simplified to:
+// <div><i onclick="handleClick(this, 'accept', '${req.id}')" class="right icon fa-regular fa-circle-check"></i></div>
+
+        function renderMessagesPanel() {
+            const content = document.getElementById("panelContent");
+            let html = `<h2 style="text-align: center;color:white">Messages</h2>`;
+
+            if (requests.length === 0) {
+                
+                html += `<p style="color:white; text-align:center;">No new messages.</p>`;
+            } else {
+                requests.forEach(req => {
+                    html += `
+                        <div class="message-div">
+                            <div class="leftside">
+                                <p><span class="red-dot"></span>${req.user}</p>
+                                <p>Request: <strong>${req.bookTitle}</strong></p>
+                            </div>
+                            <div class="rightside">
+                                <div><i onclick="handleClick(this, 'accept', '${req.id}')" onclick="setRed()" class="right icon fa-regular fa-circle-check"></i></div>
+                                <div><i onclick="handleClick(this, 'reject', '${req.id}')" class="wrong icon fa-regular fa-circle-xmark"></i></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            content.innerHTML = html;
+        }
+        function setRed(){
+            document.getElementsByClassName("right")[0].style.backgroundColor="green";
+        }
+
+
+        function openPanel(type) {
+            const box = document.getElementById("useBox");
+            const content = document.getElementById("panelContent");
+
+            if (currentPanel === type) {
+                closePanel();
+                return;
+            }
+
+            let html = "";
+            if (type === 'messages') {
+                renderMessagesPanel(); // Render messages dynamically
+            } else if (type === 'mybooks') {
+                html = `
+                    <div class="sections">
+                        <div class="card1" onclick="openmybookscontent()">My Books</div>
+                        <div class="card2" onclick="openrequestcontent()">My Requests</div>
+                    </div>
+                    <div id="mybookscontent">
+                        </div>
+                    <div id="requesting" style="display:none;">
+                        <p style="color:white; text-align:center;">No requests made yet.</p>
+                    </div>
+                `;
+                 content.innerHTML = html; // Set structure for mybooks panel
+                 renderMyBooks(); // Render my books after panel structure is in place
+            } else if (type === 'cart') {
+                html = `
+                    <h3 style="color:white; text-align:center;">Cart</h3>
+                    <li style="color:white" >You have not added any items to your cart.</li>
+                `;
+                content.innerHTML = html;
+            }
+
+            box.style.right = "10px";
+            currentPanel = type;
+
+        }
+
+        // --- Book Details Pop-up Functions ---
+
+        function openBookDetails(bookId) {
+            const book = books.find(b => b.id === bookId);
+            if (!book) {
+                console.error("Book not found:", bookId);
+                return;
+            }
+
+            document.getElementById('detailBookImage').src = book.image;
+            document.getElementById('detailBookTitle').textContent = book.title;
+            document.getElementById('detailBookAuthor').textContent = book.author;
+            document.getElementById('detailBookCategory').textContent = book.category || 'N/A';
+            document.getElementById('detailBookSemester').textContent = book.semester || 'N/A';
+            document.getElementById('detailBookBranch').textContent = book.branch || 'N/A';
+            document.getElementById('detailBookPrice').textContent = `Price: ${book.price}`;
+            document.getElementById('detailBookDescription').textContent = book.description;
+            document.getElementById('detailUploaderEmail').textContent = book.uploaderEmail || 'N/A'; // ADDED
+
+            document.getElementById('bookDetailsOverlay').style.display = 'flex';
+        }
+
+        function closeBookDetails() {
+            document.getElementById('bookDetailsOverlay').style.display = 'none';
+        }
+
+        function renderBooks() {
+            const bookSection = document.getElementById("bookSection");
+            bookSection.innerHTML = ''; // Clear existing books
+
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const filterSemester = document.getElementById('filterSemester').value.toLowerCase();
+            const filterBranch = document.getElementById('filterBranch').value.toLowerCase();
+            const filterCategory = document.getElementById('filterCategory').value.toLowerCase();
+
+            const filteredBooks = books.filter(book => {
+                const matchesSearch = book.title.toLowerCase().includes(searchText) ||
+                                      book.author.toLowerCase().includes(searchText);
+
+                const matchesSemester = filterSemester === '' || book.semester.toLowerCase() === filterSemester;
+                const matchesBranch = filterBranch === '' || book.branch.toLowerCase() === filterBranch;
+                const matchesCategory = filterCategory === '' || book.category.toLowerCase() === filterCategory;
+
+                return matchesSearch && matchesSemester && matchesBranch && matchesCategory;
+            });
+
+            if (filteredBooks.length === 0) {
+                bookSection.innerHTML = '<p style="text-align: center; width: 100%; color: #555;">No books found matching your criteria.</p>';
+                return;
+            }
+
+            filteredBooks.forEach(book => {
+                const bookElement = document.createElement('div');
+                bookElement.classList.add('book');
+                bookElement.innerHTML = `
+                    <div class="frontface">
+                        <div class="imgfld">
+                            <img src="${book.image || 'https://placehold.co/200x180/ADD8E6/000000?text=No+Image'}" alt="${book.title}" height="100%">
+                        </div>
+                        <div class="textfld">
+                            <p>${book.title}</p>
+                            <p style="color: black;">${book.type === 'free' ? 'Free' : `price : <span style="color: #a92605;margin: 0;">${book.price}</span>`}</p>
+                            <div class="field">${book.category || 'Engineering'}</div>
+                        </div>
+                    </div>
+                    <div class="backface" onclick="openBookDetails('${book.id}')">
+                        <div class="backfld">
+                            <video src="static/details.mp4" width="100%" autoplay loop muted></video>
+                            <p style="text-align: center;">Click to see details</p>
+                        </div>
+                    </div>
+                    ${book.isMyBook ? '<div class="my-book-indicator"></div>' : ''} 
+                `;
+                bookSection.appendChild(bookElement);
+            });
+        }
+
+        function renderMyBooks() {
+            const myBooksContent = document.getElementById("mybookscontent");
+            myBooksContent.innerHTML = ''; // Clear existing entries
+
+            const myBooks = books.filter(book => book.isMyBook);
+
+            if (myBooks.length === 0) {
+                myBooksContent.innerHTML = '<p style="color:white; text-align:center;">You have not added any books yet.</p>';
+                return;
+            }
+
+            myBooks.forEach(book => {
+                const bookEntry = document.createElement('div');
+                bookEntry.classList.add('mybookx');
+                bookEntry.innerHTML = `
+                    <div class="book-entry">
+                        <img src="${book.image || 'https://placehold.co/80x80/ADD8E6/000000?text=No+Image'}" alt="${book.title}" class="book-img" />
+                        <div class="book-info">
+                            <h4>${book.title}</h4>
+                            <p>Date: ${new Date().toLocaleDateString()}</p>
+                            <p>${book.type === 'free' ? 'Free' : `Price: ${book.price}`}</p>
+                        </div>
+                        <i class="fas fa-trash-alt trash-icon" onclick="deleteBook('${book.id}')"></i>
+                    </div>
+                `;
+                myBooksContent.appendChild(bookEntry);
+            });
+        }
+
+        function deleteBook(bookId) {
+            books = books.filter(book => book.id !== bookId);
+            saveBooks();
+            renderMyBooks(); // Re-render my books panel
+            renderBooks(); // Re-render main book section
+        }
+
+        // --- Event Listeners ---
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadBooks();
+            loadRequests(); // Load requests on DOMContentLoaded
+            renderBooks(); // Initial rendering of books
+        });
+
+        document.getElementById("addBookForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const title = document.getElementById('bookTitle').value;
+            const author = document.getElementById('bookAuthor').value;
+            const description = document.getElementById('bookDescription').value;
+            const imageFile = document.getElementById('bookImageUpload').files[0];
+            const bookOption = document.querySelector('input[name="bookOption"]:checked').value;
+            const semester = document.getElementById('bookSemester').value;
+            const branch = document.getElementById('bookBranch').value;
+            const category = document.getElementById('bookCategory').value;
+
+            let price = 'Free';
+            if (bookOption === 'sell') {
+                const priceInput = document.querySelector('#dynamicField input[type="number"]');
+                if (priceInput && priceInput.value) price = `₹${priceInput.value}`;
+            } else if (bookOption === 'rent') {
+                const rentInput = document.querySelector('#dynamicField input[type="number"]');
+                if (rentInput && rentInput.value) price = `₹${rentInput.value}/day`;
+            }
+
+            let imageUrl = '';
+            if (imageFile) {
+                try {
+                    imageUrl = await getBase64(imageFile);
+                } catch (error) {
+                    console.error("Error converting image to Base64:", error);
+                    imageUrl = 'https://placehold.co/200x180/ADD8E6/000000?text=Error+Loading+Image';
+                }
+            } else {
+                imageUrl = 'https://placehold.co/200x180/ADD8E6/000000?text=No+Image'; // Placeholder if no image uploaded
+            }
+
+            const newBook = {
+                id: 'book_' + Date.now(), // Unique ID
+                title: title,
+                author: author,
+                category: category,
+                semester: semester,
+                branch: branch,
+                price: price,
+                type: bookOption,
+                description: description,
+                image: imageUrl,
+                isMyBook: true,
+                uploaderEmail: 'currentuser@example.com' // ADDED: Assuming current user for uploaded book
+            };
+
+            books.push(newBook);
+            saveBooks();
+            renderBooks(); // Re-render all books including the new one
+            closeForm(); // Close the form after submission
+            alert("Book added successfully!"); // Simple feedback
+        });
+
+        // Dynamic field for price/rent based on radio button selection
+        const radios = document.querySelectorAll('input[name="bookOption"]');
+        const dynamicField = document.getElementById('dynamicField');
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === "sell") {
+                    dynamicField.innerHTML = `
+                        <label style="color: white;text-shadow: 0px 0px 4px white;">Enter Price (₹)</label>
+                        <input type="number" placeholder="Eg: 150" required style="padding: 8px; border-radius: 8px; width: 100%; margin-top: 6px;" />
+                    `;
+                } else if (radio.value === "rent") {
+                    dynamicField.innerHTML = `
+                        <label style="color: white;text-shadow: 0px 0px 4px white;">Enter Rent per Day (₹)</label>
+                        <input type="number" placeholder="Eg: 20" required style="padding: 8px; border-radius: 8px; width: 100%; margin-top: 6px;" />
+                    `;
+                } else {
+                    dynamicField.innerHTML = "";
+                }
+            });
+        });
+
+        // Image preview for upload
+        document.getElementById('bookImageUpload').addEventListener('change', function(event) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = ''; // Clear previous preview
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100px';
+                    img.style.maxHeight = '100px';
+                    img.style.marginTop = '10px';
+                    img.style.borderRadius = '8px';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('input', () => {
+            renderBooks(); // Call renderBooks on search input
+        });
+
+        // Event listeners for filter dropdowns
+        document.getElementById('filterSemester').addEventListener('change', renderBooks);
+        document.getElementById('filterBranch').addEventListener('change', renderBooks);
+        document.getElementById('filterCategory').addEventListener('change', renderBooks);
+
+        document.addEventListener("click", function (event) {
+            const useBox = document.getElementById("useBox");
+            const bookDetailsOverlay = document.getElementById("bookDetailsOverlay");
+            const formOverlay = document.getElementById("formOverlay");
+
+            const isClickInsideUseBox = useBox.contains(event.target);
+            const isClickInsideDetails = bookDetailsOverlay.contains(event.target);
+            const isClickInsideForm = formOverlay.contains(event.target);
+
+            const isPanelButton = event.target.closest(".flds") || event.target.closest(".hamburger");
+            const isAddBookButton = event.target.closest(".addbook");
+            const isBookElement = event.target.closest(".book"); // Check if click is on a book element
+
+            // Close side panel if clicked outside and not on a trigger button
+            if (!isClickInsideUseBox && !isPanelButton && currentPanel !== "") {
+                closePanel();
+            }
+
+            // Close book details if clicked outside and not on a book element
+            if (!isClickInsideDetails && bookDetailsOverlay.style.display === 'flex' && !isBookElement) {
+                closeBookDetails();
+            }
+
+            // Close add book form if clicked outside and not on add book button
+            if (!isClickInsideForm && formOverlay.style.display === 'flex' && !isAddBookButton) {
+                closeForm();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            const tag = event.target.tagName.toLowerCase();
+            const isTypingField = tag === 'input' || tag === 'textarea' || tag === 'select'; // Include select for typing fields
+
+            if (event.code === "Space" && !isTypingField) {
+                event.preventDefault();
+                closePanel();
+                closeBookDetails();
+                closeForm();
+            }
+        });
+
+
+        function clearBooks() {
+            localStorage.removeItem('books');
+            alert("All saved books have been removed.");
+            location.reload();
+        }
+    </script>
+    <script src="homepage.js"></script>
+    <script>
+        displayUserInfo('username', 'email');
+    </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("toggle");
+
+      // Step 1: Set toggle based on mode
+      const currentPage = window.location.pathname;
+      if (currentPage.includes("Motivation2.html")) {
+        localStorage.setItem("relaxMode", "true");
+        toggle.checked = true;
+      } else if (currentPage.includes("bookshelf.html")) {
+        localStorage.setItem("relaxMode", "false");
+        toggle.checked = false;
+      }
+
+      // Step 2: When toggle changes, redirect
+      toggle.addEventListener("change", function () {
+        if (this.checked) {
+          window.location.href = "Motivation2.html";
+        } else {
+          window.location.href = "bookshelf.html";
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

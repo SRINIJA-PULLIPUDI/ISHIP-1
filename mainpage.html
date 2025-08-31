@@ -5,22 +5,324 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learnoha</title>
   <link rel="stylesheet" href="mainpage.css" />
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
-  <header>
-    <div class="logo">Learnoha</div>
+<body onload="reload()" onscroll="Fix()">
+  <header id="Header">
+    <div class="logo">
+      <a href="mainpage.html">
+        <img src="/Images/logo.png" class="image"/>
+      </a>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
     <nav>
       <ul class="options">
-        <li><a href="#bookshelf" class="navi">Bookshelf</a></li>
-        <li><a href="#calendar" class="navi">Calendar</a></li>
-        <li><a href="#portifolio" class="navi">Portifolio</a></li>
-        <li><a href="#bookswap" class="navi">Bookswap</a></li>
-        <li><a href="#Vault" class="navi">Vault</a></li>
-        <li><a href="#todolist" class="navi">To-do List</a></li>
+        <li class="l"><a href="bookshelf.html" class="navi">Bookshelf</a></li>
+        <li class="l"><a href="calendar.html" class="navi">Calendar</a></li>
+        <li class="l"><a href="portfolioForm.html" class="navi">Portifolio</a></li>
+        <li class="l"><a href="bookswap.html" class="navi">Bookswap</a></li>
+        <li class="l"><a href="pdf.html" class="navi">Vault</a></li>
       </ul>
     </nav>
-    <a href="login.html" class="login"> Login </a>
+    <div class="toggle-switch">
+      <input class="toggle-input" id="toggle" type="checkbox">
+      <label class="toggle-label" for="toggle"></label>
+    </div>
+    <div class="user" id="user">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <div class="profile">
+      <div class="back">
+        <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:black"></i>
+      </div>
+      <div class="userprofile">
+        <div class="user u">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="name"> </div>
+        <div class="email"> </div>
+        <br/>
+      </div>
+      
+      <a href="Motivation2.html" class="relax">
+        <div class="relaxnav"></div>
+        <div class="relaxcont"> Switch to <br/> Relax Mode </div>
+      </a>
+      <a href="homepage.html" class="logout"> Logout </a>
+    </div>
   </header>
-  <h1> Book Shelf </h1>
+
+  <section class="hero">
+    <div class="heroQuote">
+      <div class="heroquote">
+        <div class="quote">
+          <div class="q1"> Elevate Your &nbsp; </div>
+          <div style="color:#B4588D;" class="q2"> Learning </div><br/>
+        </div>
+        <div class="sp">Experience</div>
+      </div>
+      <div class="herocont"> 
+        LearnOha empowers your educational journey.
+        Our seamless platform combines efficient learning with dedicated relaxation, ensuring holistic growth and well-being.
+      </div>
+      <div class="welcome"> 
+        <div class="w1"> Welcome </div> 
+        <div class="welcomeuser"></div>
+      </div>
+    </div>
+    <div class="heroImage">
+      <img src="/Images/hpic.jpg" class="heroimg"/>
+    </div>
+  </section>
+  <!-- <section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Elevate Your <span class="learning-word">Learning</span><br>
+            <span class="experience-word">Experience</span>
+        </h1>
+        <p class="hero-description">
+            LearnOha empowers your educational journey. Our seamless platform combines efficient learning with dedicated relaxation, ensuring holistic growth and well-being.
+        </p>
+        <a href="#" class="get-started-button">Get Started</a>
+    </div>
+  </section> -->
+
+  <section class="comm whoweare">
+    <div class="pic whopic">
+        <img src="/Images/whoweare.jpg" class="image1"/>
+      </div>
+    <div class="maincont ">
+      <p class="head headcont"> Who We Are </p>
+      <p class="cont1">
+        At Learnoha, we are a passionate team dedicated to redefining the learning experience.
+        We understand the challenges of modern education and the importance of mental well-being, which is why we’ve created a unique online platform.
+      </p>
+      <p class="cont1">
+        Our commitment extends to integrating cutting-edge technology with user-friendly design.
+        We believe that effective learning shouldn't come at the cost of personal peace.
+        By offering intuitive tools for organization, knowledge access, and skill development, we aim to simplify your academic journey and boost your productivity.
+      </p>
+      <p class="cont1">
+        Ultimately, Learnoha is more than just a website; it's a supportive ecosystem.
+        We strive to be your reliable partner in achieving academic success and maintaining a healthy mind, helping you navigate the demands of study with greater ease and enjoyment.
+        Join us in building a more balanced and effective approach to learning.
+      </p>
+    </div>
+  </section>
+  <section class="comm bookshelf">
+    <div class="maincont ">
+      <p class="head h2"> Book Shelf</p>
+      <p class="cont cont2">
+        Your ultimate digital library, meticulously designed to organize and provide instant access to all your PDFs, e-books, and study materials.
+        Experience effortless navigation and quick retrieval of vital information, keeping everything neatly categorized and at your fingertips for enhanced study efficiency.
+        Create custom folders and sub-folders to mirror your course structure or research topics.
+        This powerful tool transforms scattered files into a perfectly curated knowledge hub, boosting your productivity.
+      </p>
+    </div>
+    <div class="pic bspic">
+      <img src="/Images/bookshelf.jpg" class="image1"/>
+    </div>
+  </section>
+  <section class="comm calendar">
+    <div class="pic calpic">
+      <img src="/Images/calendar.jpg" class="image1"/>
+    </div> 
+    <div class="maincont ">
+      <p class="head h3"> Calendar and <br/> To-do List </p>
+      <p class="cont cont3"> 
+        Never miss a beat with our intelligent calendar.
+        Seamlessly manage academic deadlines, assignments, personal appointments,and exams all while integrating perfectly with your built-in to-do list.
+        Receive timely, customizable reminders directly, ensuring you stay organized, meet all commitments, and maintain a clear overview of your busy schedule.
+        Easily drag and drop tasks from your to-do list directly onto specific dates, visualizing your workload and optimizing your time management.
+      </p>
+    </div>
+  </section>
+  <section class="comm portifolio">
+    <div class="maincont ">
+      <p class="head h4"> Portifolio </p>
+      <p class="cont cont4">
+        Showcase your academic and creative prowess with a dynamic online portfolio.
+        Curate and display your best projects, essays, and presentations to highlight your achievements.
+        This professional space helps you build a strong personal brand for future opportunities or simply to celebrate your progress.
+        Beyond traditional academic work, easily upload and display your coding projects, technical documentation, or links to live applications.
+        Demonstrate your programming language proficiency and highlight significant coding achievements.
+        This makes your portfolio a comprehensive representation of all your skills and accomplishments.
+      </p>
+    </div>
+    <div class="pic portpic">
+      <img src="/Images/portpic.jpg" class="image1"/>
+    </div>
+  </section>
+  <section class="comm bookswap">
+    <div class="pic bookpic">
+      <img src="/Images/bookswap.jpg" class="image1"/>
+    </div>
+    <div class="maincont ">
+      <p class="head h5"> Book Swap </p>
+      <p class="cont cont5">
+        Engage with our vibrant community through BookSwap.
+        Easily exchange physical or digital books you no longer need with fellow learners.
+        This feature promotes sustainable resource sharing, fosters connection, and helps everyone access a wider range of study materials affordably.
+        Discover hidden gems and expand your personal library without breaking the bank.
+        Our intuitive matching system connects you with users who have the books you're looking for, or are interested in yours.
+        It's a win-win for both your wallet and the environment, fostering a true collaborative learning spirit.
+      </p>
+    </div>
+  </section>
+  <section class="comm Vault">
+    <div class="maincont ">
+      <p class="head h6"> Vault </p>
+      <p class="cont cont6">
+        A secure, private space for your important notes and ideas, combined with a powerful task manager to keep your study goals on track.
+        Your personal Vault ensures complete confidentiality for sensitive research, creative brainstorming, or journal entries.
+        Organize thoughts with customizable tags and folders, making information retrieval effortless.
+      </p>
+    </div>
+    <div class="pic vaultpic">
+      <img src="/Images/mydoc.jpg" class="image1"/>
+    </div>
+  </section>
+  <section class="comm funfact">
+    <div class="pic factpic">
+      <img src="/Images/funfact.jpg" class="image1"/>
+    </div>
+    <div class="maincont ">
+      <p class="head h7"> Funfacts <br/> & Jokes </p>
+      <p class="cont cont7">
+        Take a break and refresh your mind with our collection of fun facts and light-hearted jokes! Whether you're looking to learn something quirky or share a laugh, this corner is designed to bring a smile to your face.
+        Enjoy quick bites of trivia and humor — perfect for a short mental refresh between tasks or study sessions.
+      </p>
+    </div>
+  </section>
+  <section class="comm games">
+    <div class="maincont ">
+      <p class="head h8"> Games </p>
+      <p class="cont cont8">
+        Take a quick break with our collection of small, fun games designed to lift your mood and reduce stress. 
+        Whether you're waiting, winding down, or just need a breather, these games are perfect for a few moments of carefree enjoyment.
+        <br/> No pressure — just pure fun to refresh your day!
+        We believe that a few minutes of playful distraction can make a big difference in how you feel.
+        So go ahead — pick a game, dive in, and let your stress melt away for a bit.
+        Your brain will thank you later!
+      </p>
+    </div>
+    <div class="pic gamepic">
+      <img src="/Images/gamespic.jpg" class="image1"/>
+    </div>
+  </section>
+  <section class="benefit">
+    <div class="head b"> You Can Benefit From </div>
+    <div class="c">
+      <div class="seg s1">
+        <div class="card c1">
+          <div class="ic"> <span class="number" data-target="100"> 0 </span><span class="unit">%</span></div>
+          <div class="ben">
+            Tailored tools to your <br/>
+            specific needs/challenges
+          </div>
+        </div>
+        <div class="card c2">
+          <div class="ic"> <span class="number" data-target="100"> 0 </span><span class="unit">+</span> </div>
+          <div class="ben">
+            Hours Saved in <br/>
+            Organization & Research
+          </div>
+        </div>
+        <div class="card c3">
+          <div class="ic"> <span class="number" data-target="360"> 0 </span><span class="unit">°</span></div>
+          <div class="ben">
+            Holistic Support for <br/> Study
+            & Well-being
+          </div>
+        </div>
+      </div>
+      <div class="seg s2">
+        <div class="card c4">
+          <div class="ic"><span class="number" data-target="20"> 0 </span><span class="unit">+</span></div>
+          <div class="ben">
+            Integrated Features for <br/>
+            Optimal Productivity
+          </div>
+        </div>
+        <div class="card c5">
+          <div class="ic"> <span class="number" data-target="30"> 0 </span><span class="unit">+</span> </div>
+          <div class="ben">
+            Curated Music & <br/>
+            Soundscapes for Focus
+          </div>
+        </div>
+        <div class="card c6">
+          <div class="ic"> <span class="number" data-target="10"> 0 </span><span class="unit">+</span> </div>
+          <div class="ben">
+            Engaging Games for <br/>
+            Mental Breaks
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p> &copy; 2025 <span style="color:#E82166;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+  <script src="/homepage.js"> </script>
+  <script>
+    displayUserInfo('username', 'email');
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("toggle");
+
+      // Step 1: Set toggle based on mode
+      const currentPage = window.location.pathname;
+      if (currentPage.includes("Motivation2.html")) {
+        localStorage.setItem("relaxMode", "true");
+        toggle.checked = true;
+      } else if (currentPage.includes("music_page.html")) {
+        localStorage.setItem("relaxMode", "false");
+        toggle.checked = false;
+      }
+
+      // Step 2: When toggle changes, redirect
+      toggle.addEventListener("change", function () {
+        if (this.checked) {
+          window.location.href = "Motivation2.html";
+        } else {
+          window.location.href = "mainpage.html";
+        }
+      });
+    });
+  </script>
 </body>
 </html>

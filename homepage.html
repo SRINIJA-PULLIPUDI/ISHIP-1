@@ -5,23 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learnoha</title>
   <link rel="stylesheet" href="homepage.css" />
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onload="reload()" onscroll="Fix()">
   <header id="Header">
     <div class="logo">
-      <img src="/Images/logo.jpg"/>
+      <a href="homepage.html">
+        <img src="/Images/logo.png" class="image"/>
+      </a>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
     </div>
     <nav>
       <ul class="options">
-        <li class="l1"><a href="#bookshelf" class="navi">Bookshelf</a></li>
-        <li class="l"><a href="#calendar" class="navi">Calendar</a></li>
-        <li class="l"><a href="#portifolio" class="navi">Portifolio</a></li>
-        <li class="l"><a href="#bookswap" class="navi">Bookswap</a></li>
-        <li class="l"><a href="#Vault" class="navi">Vault</a></li>
-        <li class="l"><a href="#todolist" class="navi">To-do List</a></li>
+        <li class="l1"><a href="login.html" class="navi">Bookshelf</a></li>
+        <li class="l"><a href="login.html" class="navi">Calendar</a></li>
+        <li class="l"><a href="login.html" class="navi">Portifolio</a></li>
+        <li class="l"><a href="login.html" class="navi">Bookswap</a></li>
+        <li class="l"><a href="login.html" class="navi">Vault</a></li>
       </ul>
     </nav>
     <a href="login.html" class="login"> Login </a>
@@ -29,23 +35,32 @@
 
   <section class="hero">
     <div class="heroQuote">
-      <div class="quote">Elevate Your Learning <br/> Experience</div>
-      <div class="herocont"> LearnOha provides all the tools you need to organize, track, and enhance your educational journey in one seamless platform, making your path to knowledge both efficient and enjoyable.
-        Beyond academics, we also offer dedicated resources to help you relax, recharge, and maintain a healthy balance, ensuring holistic growth and well-being.
+      <div class="heroquote">
+        <div class="quote">
+          <div class="q1"> Elevate Your &nbsp; </div>
+          <div style="color:#B4588D;" class="q2"> Learning </div><br/>
+        </div>
+        <div class="sp">Experience</div>
       </div>
+      <div class="herocont"> 
+        LearnOha empowers your educational journey.
+        Our seamless platform combines efficient learning with dedicated relaxation, ensuring holistic growth and well-being.
+      </div>
+      <a href="login.html" class="getstarted"> Get Started </a>
     </div>
     <div class="heroImage">
-      <!-- <img src="/Images/hpic.jpg"/> -->
+      <img src="/Images/hpic.jpg" class="heroimg"/>
     </div>
   </section>
   <section class="comm whoweare">
-    <div class="whopic"></div>
-    <div class="maincont">
-      <p class="head headcont"> Who Are We </p>
+    <div class="pic whopic">
+      <img src="/Images/whoweare.jpg" class="image1"/>
+    </div>
+    <div class="maincont ">
+      <p class="head headcont"> Who We Are </p>
       <p class="cont1">
         At Learnoha, we are a passionate team dedicated to redefining the learning experience.
         We understand the challenges of modern education and the importance of mental well-being, which is why we’ve created a unique online platform.
-        Our vision is to provide a seamless environment where academic rigor meets essential relaxation, empowering students and lifelong learners to excel without compromise.
       </p>
       <p class="cont1">
         Our commitment extends to integrating cutting-edge technology with user-friendly design.
@@ -59,10 +74,8 @@
       </p>
     </div>
   </section>
-  <section class="benefit">
-  </section>
   <section class="comm bookshelf">
-    <div class="maincont">
+    <div class="maincont ">
       <p class="head h2"> Book Shelf</p>
       <p class="cont cont2">
         Your ultimate digital library, meticulously designed to organize and provide instant access to all your PDFs, e-books, and study materials.
@@ -71,12 +84,15 @@
         This powerful tool transforms scattered files into a perfectly curated knowledge hub, boosting your productivity.
       </p>
     </div>
-    <div class="bspic"></div>
+    <div class="pic bspic">
+      <img src="/Images/bookshelf.jpg" class="image1"/>
     </div>
   </section>
   <section class="comm calendar">
-    <div class="calpic"></div>
-    <div class="maincont">
+    <div class="pic calpic">
+      <img src="/Images/calendar.jpg" class="image1"/>
+    </div> 
+    <div class="maincont ">
       <p class="head h3"> Calendar and <br/> To-do List </p>
       <p class="cont cont3"> 
         Never miss a beat with our intelligent calendar.
@@ -87,7 +103,7 @@
     </div>
   </section>
   <section class="comm portifolio">
-    <div class="maincont">
+    <div class="maincont ">
       <p class="head h4"> Portifolio </p>
       <p class="cont cont4">
         Showcase your academic and creative prowess with a dynamic online portfolio.
@@ -98,11 +114,15 @@
         This makes your portfolio a comprehensive representation of all your skills and accomplishments.
       </p>
     </div>
-    <div class="portpic"></div>
+    <div class="pic portpic">
+      <img src="/Images/portpic.jpg" class="image1"/>
+    </div>
   </section>
   <section class="comm bookswap">
-    <div class="bookpic"></div>
-    <div class="maincont">
+    <div class="pic bookpic">
+      <img src="/Images/bookswap.jpg" class="image1"/>
+    </div>
+    <div class="maincont ">
       <p class="head h5"> Book Swap </p>
       <p class="cont cont5">
         Engage with our vibrant community through BookSwap.
@@ -115,10 +135,233 @@
     </div>
   </section>
   <section class="comm Vault">
+    <div class="maincont ">
+      <p class="head h6"> Vault </p>
+      <p class="cont cont6">
+        A secure, private space for your important notes and ideas, combined with a powerful task manager to keep your study goals on track.
+        Your personal Vault ensures complete confidentiality for sensitive research, creative brainstorming, or journal entries.
+        Organize thoughts with customizable tags and folders, making information retrieval effortless.
+      </p>
+    </div>
+    <div class="pic vaultpic">
+      <img src="/Images/mydoc.jpg" class="image1"/>
+    </div>
+  </section>
+  <section class="comm funfact">
+    <div class="pic factpic">
+      <img src="/Images/funfact.jpg" class="image1"/>
+    </div>
+    <div class="maincont ">
+      <p class="head h7"> Funfacts <br/> & Jokes </p>
+      <p class="cont cont7">
+        Take a break and refresh your mind with our collection of fun facts and light-hearted jokes! Whether you're looking to learn something quirky or share a laugh, this corner is designed to bring a smile to your face.
+        Enjoy quick bites of trivia and humor — perfect for a short mental refresh between tasks or study sessions.
+      </p>
+    </div>
+  </section>
+  <section class="comm games">
+    <div class="maincont ">
+      <p class="head h8"> Games </p>
+      <p class="cont cont8">
+        Take a quick break with our collection of small, fun games designed to lift your mood and reduce stress. 
+        Whether you're waiting, winding down, or just need a breather, these games are perfect for a few moments of carefree enjoyment.
+        <br/> No pressure — just pure fun to refresh your day!
+        We believe that a few minutes of playful distraction can make a big difference in how you feel.
+        So go ahead — pick a game, dive in, and let your stress melt away for a bit.
+        Your brain will thank you later!
+      </p>
+    </div>
+    <div class="pic gamepic">
+      <img src="/Images/gamespic.jpg" class="image1"/>
+    </div>
+  </section>
+  <section class="benefit">
+    <div class="head b"> You Can Benefit From </div>
+    <div class="c">
+      <div class="seg s1">
+        <div class="card c1">
+          <div class="ic"> <span class="number" data-target="100"> 0 </span><span class="unit">%</span></div>
+          <div class="ben">
+            Tailored tools to your <br/>
+            specific needs/challenges
+          </div>
+        </div>
+        <div class="card c2">
+          <div class="ic"> <span class="number" data-target="100"> 0 </span><span class="unit">+</span> </div>
+          <div class="ben">
+            Hours Saved in <br/>
+            Organization & Research
+          </div>
+        </div>
+        <div class="card c3">
+          <div class="ic"> <span class="number" data-target="360"> 0 </span><span class="unit">°</span></div>
+          <div class="ben">
+            Holistic Support for <br/> Study
+            & Well-being
+          </div>
+        </div>
+      </div>
+      <div class="seg s2">
+        <div class="card c4">
+          <div class="ic"><span class="number" data-target="20"> 0 </span><span class="unit">+</span></div>
+          <div class="ben">
+            Integrated Features for <br/>
+            Optimal Productivity
+          </div>
+        </div>
+        <div class="card c5">
+          <div class="ic"> <span class="number" data-target="30"> 0 </span><span class="unit">+</span> </div>
+          <div class="ben">
+            Curated Music & <br/>
+            Soundscapes for Focus
+          </div>
+        </div>
+        <div class="card c6">
+          <div class="ic"> <span class="number" data-target="10"> 0 </span><span class="unit">+</span> </div>
+          <div class="ben">
+            Engaging Games for <br/>
+            Mental Breaks
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <footer>
-    <p>&copy; 2025 Learnoha. All rights reserved.</p>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p> &copy; 2025 <span style="color:#E82166;">Learnoha</span>. All rights reserved. </p>
+    </div>
   </footer>
+  <script> 
+    function reload(){
+      document.getElementsByTagName("header")[0].style = "transform:translateY(0px)";
+      document.getElementsByClassName("heroQuote")[0].style="transform:translateY(0px);opacity:1;";
+      document.getElementsByClassName("heroImage")[0].style="transform:translateX(0px);opacity:1;";
+    }
+
+    function Fix() {
+        var header = document.getElementById("Header");
+        var sticky = header.offsetTop;
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+    const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        }
+    });
+    }, {
+    threshold: 0.4
+    });
+
+    const observer1 = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        entry.target.classList.add('show1');
+        }
+    });
+    }, {
+    threshold: 0.5
+    });
+
+    const observer2 = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        entry.target.classList.add('show2');
+        }
+    });
+    }, {
+    threshold: 0.4
+    });
+
+    document.querySelectorAll('.maincont').forEach(ele => {
+        observer.observe(ele);
+    });
+
+    document.querySelectorAll('.pic').forEach(ele => {
+        observer1.observe(ele);
+    });
+
+    document.querySelectorAll('.card').forEach(ele => {
+        observer2.observe(ele);
+    });
+
+    const img = document.querySelector('.heroImage');
+    img.classList.add('float');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const counters = document.querySelectorAll('.card .number');
+
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 750;
+            let startTime = null;
+
+            const animate = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const progress = (currentTime - startTime) / duration;
+
+                if (progress < 1) {
+                    const current = Math.floor(progress * target);
+                    counter.textContent = current;
+                    requestAnimationFrame(animate);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+
+            requestAnimationFrame(animate);
+        };
+
+        const observer5 = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer5.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        counters.forEach(counter => {
+            observer5.observe(counter);
+        });
+    });
+
+    function toggleMenu() {
+      const nav = document.querySelector("nav");
+      nav.classList.toggle("active");
+    }
+  </script>
 </body>
-<script src="/homepage.js"> </script>
 </html>

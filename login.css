@@ -1,10 +1,23 @@
+*{
+  margin:0;
+  padding:0;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f6f8fa;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+}
+
+.LearnohaSignin{
+  width:100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
 }
 
 .card{
@@ -20,7 +33,7 @@ body {
 .pic{
   width:600px;
   height:80svh;
-  border:1px solid red;
+  background-image: url('/static/manholdingbook.png');
 }
 
 .container {
@@ -28,18 +41,26 @@ body {
   height:80svh;
   background: white;
   border: 1px solid #d0d7de;
-  text-align: center;
   padding:0 2rem 0 2rem;
 }
 
 .logo {
   width: 48px;
-  margin-bottom: 1rem;
+  margin-left:30%;
+}
+
+.image{
+  width:100px;
+  height: auto;
 }
 
 h2 {
   margin-bottom: 1.5rem;
   color: #24292f;
+}
+
+h4{
+  margin:-1rem 0 0 0;
 }
 
 .login-form {
@@ -88,9 +109,10 @@ input {
 }
 
 .signin-btn {
+  height: 100%;
   width: 100%;
   padding: 0.6rem;
-  /* background-color: #2ea44f; */
+  background-image: linear-gradient(to right, #5798FF 40%,#387ae4);
   color: white;
   border: none;
   border-radius: 6px;
@@ -103,7 +125,7 @@ input {
 }
 
 .signin-btn:hover {
-  background-color: #4f719e;
+  background-image: linear-gradient(to right, #4a82dc 40%,#2f64bb);
 }
 
 .divider {
@@ -165,4 +187,104 @@ input {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+footer{
+  width:100%;
+  height:50px;
+  background-color: #282a2a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0 0 0 0;
+}
+
+
+
+@media (max-width: 500px) {
+  .quote, .sp {
+    font-size: 28px;
+  }
+
+  .getstarted, .login {
+    width: 100px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .ben {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .card {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .b {
+    font-size: 28px;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .c {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    gap: 1rem;
+  }
+
+  .seg {
+    width: 100%;
+    height: auto;
+    gap: 1rem;
+  }
+
+  footer {
+    height: auto;
+    padding: 1.5rem 0;
+  }
+
+  .des {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .sec {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+
+  .logo1 {
+    width: 140px;
+    height: 70px;
+  }
+
+  .logocont {
+    font-size: 13px;
+    margin-top: 0.4rem;
+  }
+
+  .footerhead {
+    font-size: 17px;
+    margin-top: 0.8rem;
+  }
+
+  .footercont {
+    width: auto;
+    align-items: center;
+  }
+
+  .fcont {
+    font-size: 13px;
+    margin-bottom: 0.4rem;
+  }
+
+  .icons {
+    margin-top: 0.8rem;
+  }
+
 }

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Motivation</title>
+  <link rel="stylesheet" href="motivation2abc.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header>
+    <div class="logo-placeholder">
+        <img src="./Images/logo.png"/>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+    <nav id="navMenu">
+      <a href="#" class="active">Motivation</a>
+      <a href="funfacts2.html">Fun-Facts</a>
+      <a href="Jokes.html">Jokes</a>
+      <a href="./loading_page.html">Games</a>
+      <a href="./music_page.html">Music</a>
+    </nav>
+
+    <div class="toggle-switch">
+      <input class="toggle-input" id="toggle" type="checkbox">
+      <label class="toggle-label" for="toggle"></label>
+    </div>
+
+
+    <div class="profile-icon" id="user">
+      <i class="fa-solid fa-circle-user" style="color: #8CDCE4;"></i>
+    </div>
+
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="profile">
+      <div class="back">
+        <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:white"></i>
+      </div>
+      <div class="userprofile">
+        <div class="user u">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="name"> </div>
+        <div class="email"> </div>
+        <br/>
+      </div>
+      
+      <a href="mainpage.html" class="relax">
+        <div class="relaxnav"></div>
+        <div class="relaxcont"> Switch to <br/> Study Mode </div>
+      </a>
+      <a href="homepage.html" class="logout"> Logout </a>
+    </div>
+  </header>
+
+
+  <div class="hero-section">
+    <div class="heropic-parent">
+        <div class="hero-pic"></div>
+    </div>
+    <div class="hero-textbox1">
+        <div class="herotext1">Your calm mind is the ultimate weapon against your challenges.<br> So relax.</div>
+    </div>
+  </div>
+
+  <h1>🚀 Motivation Station 🚀</h1>
+  <button onclick="showRandomQuote()">💡 Inspire Me!</button>
+
+  <div class="quotes-container" id="quotesContainer">
+    <div class="quote">The best way to get started is to quit talking and begin doing.</div>
+    <div class="quote">Don't let yesterday take up too much of today.</div>
+    <div class="quote">You learn more from failure than from success. Don’t let it stop you.</div>
+    <div class="quote">It’s not whether you get knocked down, it’s whether you get up.</div>
+    <div class="quote">If you are working on something exciting, it will keep you motivated.</div>
+    <div class="quote">Success doesn’t just find you. You have to go out and get it.</div>
+    <div class="quote">Push yourself, because no one else is going to do it for you.</div>
+    <div class="quote">Sometimes later becomes never. Do it now.</div>
+    <div class="quote">Great things never come from comfort zones.</div>
+    <div class="quote">Dream it. Wish it. Do it.</div>
+    <div class="quote">You are capable of amazing things. Even Mondays can’t stop you!</div>
+    <div class="quote">Be a cupcake in a world full of muffins.</div>
+    <div class="quote">Mistakes are proof you are trying. So keep messing up gloriously!</div>
+    <div class="quote">Success is 99% coffee and 1% crazy determination.</div>
+    <div class="quote">Don't wait for opportunity. Create a weird one.</div>
+    <div class="quote">Be the reason someone smiles today — or at least chuckles awkwardly.</div>
+    <div class="quote">You're not a mess. You're a beautiful explosion of potential!</div>
+    <div class="quote">You can do hard things. Like not checking your phone for 5 minutes.</div>
+    <div class="quote">Stars can’t shine without darkness — or Wi-Fi sometimes.</div>
+    <div class="quote">You got this. And if you don’t, fake it 'til you make it!</div>
+    <div class="quote">Dream big. Nap often.</div>
+    <div class="quote">Keep going. Even if you're crawling with style.</div>
+    <div class="quote">If plan A didn’t work, don’t worry. The alphabet has 25 more letters.</div>
+    <div class="quote">Progress, not perfection — but glitter helps.</div>
+    <div class="quote">Don’t be afraid to sparkle a little brighter today.</div>
+    <div class="quote">When nothing goes right… go left!</div>
+    <div class="quote">You're one in a melon. Keep it juicy!</div>
+    <div class="quote">The elevator to success is broken — take the stairs… with dance moves.</div>
+    <div class="quote">You are not behind. You're just in your own cool lane.</div>
+    <div class="quote">Smile. Confuse the negativity.</div>
+    <div class="quote">Be like a pineapple: stand tall, wear a crown, and be sweet inside.</div>
+    <div class="quote">Why fit in when you were born to stand out?</div>
+    <div class="quote">Wake up. Be awesome. Repeat.</div>
+    <div class="quote">It’s a good day to have a good day — even if it rains tacos.</div>
+    <div class="quote">Throw kindness around like confetti.</div>
+    <div class="quote">You're braver than you believe, stronger than you seem, and goofier than you admit.</div>
+    <div class="quote">Keep your heels, head, and standards high — or just your socks if you’re chilling.</div>
+    <div class="quote">Even the best was once a beginner — or totally clueless.</div>
+    <div class="quote">Be fearless in the pursuit of what makes your eyebrows raise.</div>
+    <div class="quote">Confidence is silent. Insecurities are loud. Farts are louder.</div>
+    <div class="quote">Don’t quit. You're way too glittery for that.</div>
+    <div class="quote">The world needs your weird.</div>
+    <div class="quote">Stay strong. The weekend is almost here.</div>
+    <div class="quote">Work hard, snack harder.</div>
+    <div class="quote">You are enough. Even if your socks don’t match.</div>
+    <div class="quote">Stay positive. Test negative.</div>
+    <div class="quote">Your vibe attracts your tribe — unless your Wi-Fi is down.</div>
+    <div class="quote">Life’s too short to be serious all the time. Smile while you still have teeth.</div>
+    <div class="quote">You didn’t come this far to only scroll Instagram.</div>
+    <div class="quote">Go the extra mile — it’s less crowded and there’s probably snacks.</div>
+  </div>
+  <button id="toggleQuotesBtn" onclick="toggleQuotes()">Show More</button>
+
+
+  <!-- Modal -->
+  <div class="modal" id="quoteModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <p id="randomQuoteText">This is a motivational quote!</p>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email:&nbsp;support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p style="font-family: 'Segoe UI', sans-serif;"> &copy; 2025 <span style="color:#E82166;font-family: 'Segoe UI', sans-serif;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+  <script>
+const modal = document.getElementById("quoteModal");
+const modalContent = document.querySelector(".modal-content");
+
+function showRandomQuote() {
+  const quotes = document.querySelectorAll(".quote");
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  const quoteText = randomQuote.textContent;
+
+  // Set the text content in the modal
+  document.getElementById("randomQuoteText").textContent = quoteText;
+  modal.style.display = "flex";
+  document.body.classList.add("modal-open");
+
+  // 🔈 Read the quote aloud
+  speechSynthesis.cancel(); // Stop any previous speech
+  const utterance = new SpeechSynthesisUtterance(quoteText);
+  utterance.lang = 'en-US';
+  speechSynthesis.speak(utterance);
+}
+
+
+function closeModal() {
+  modal.style.display = "none";
+  document.body.classList.remove("modal-open");
+}
+
+
+ let expanded = false;
+  const toggleBtn = document.getElementById("toggleQuotesBtn");
+  const allquotes = document.querySelectorAll("#quotesContainer .quote");
+
+  allquotes.forEach((quote, index) => {
+    if (index >= 8) {
+      quote.classList.add("hidden");
+    }
+  });
+
+  function toggleQuotes() {
+    expanded = !expanded;
+    allquotes.forEach((quote, index) => {
+      if (index >= 8) {
+        quote.classList.toggle("hidden", !expanded);
+      }
+    });
+    toggleBtn.textContent = expanded ? "Show Less" : "Show More";
+  }
+
+
+window.addEventListener("click", function (e) {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+function toggleMenu() {
+      const nav = document.getElementById("navMenu");
+      nav.classList.toggle("show");
+
+    }
+
+
+function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  nav.classList.toggle("show");
+
+  // ✅ Add/remove class on <body> when menu is toggled
+  if (nav.classList.contains("show")) {
+    document.body.classList.add("menu-open");
+  } else {
+    document.body.classList.remove("menu-open");
+  }
+}
+const userIcon = document.getElementById('user');
+const sidebar = document.getElementsByClassName('profile')[0];
+const closeArrow = document.getElementsByClassName('back')[0];
+
+userIcon.addEventListener('click', () => {
+    sidebar.classList.add('hidden10');
+});
+
+closeArrow.addEventListener('click', () => {
+    sidebar.classList.remove('hidden10');
+});
+
+document.addEventListener('click', (e) => {
+    if (
+    !sidebar.contains(e.target) && 
+    !userIcon.contains(e.target)
+    ) {
+    sidebar.classList.remove('hidden10');
+    }
+});
+displayUserInfo('username', 'email');
+function displayUserInfo(usernameId, emailId) {
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) {
+    window.location.href = 'login.html';
+    return;
+  }else{
+    if (usernameId) document.getElementsByClassName('name')[0].innerText = user.username;
+    if (emailId) document.getElementsByClassName('email')[0].innerText = user.email;
+    if (usernameId) document.getElementsByClassName('welcomeuser')[0].innerText = user.username;
+  }
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("toggle");
+
+  // Step 1: Set toggle based on mode
+  const currentPage = window.location.pathname;
+  if (currentPage.includes("Motivation2.html")) {
+    localStorage.setItem("relaxMode", "true");
+    toggle.checked = true;
+  } else if (currentPage.includes("music_page.html")) {
+    localStorage.setItem("relaxMode", "false");
+    toggle.checked = false;
+  }
+
+  // Step 2: When toggle changes, redirect
+  toggle.addEventListener("change", function () {
+    if (this.checked) {
+      window.location.href = "mainpage.html";
+    } else {
+      window.location.href = "mainpage.html";
+    }
+  });
+});
+
+</script>
+</body>
+</html>

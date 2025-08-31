@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="portfolioForm.css">
+    <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body onload="reload()" onscroll="Fix()">
+    <header id="Header">
+        <div class="logo">
+        <a href="mainpage.html">
+            <img src="/Images/logo.png" class="image"/>
+        </a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+        </div>
+        <nav>
+        <ul class="options">
+            <li class="l"><a href="bookshelf.html" class="navi">Bookshelf</a></li>
+            <li class="l"><a href="calendar.html" class="navi">Calendar</a></li>
+            <li class="l"><a href="portfolioForm.html" class="navi active">Portifolio</a></li>
+            <li class="l"><a href="bookswap.html" class="navi">Bookswap</a></li>
+            <li class="l"><a href="pdf.html" class="navi">Vault</a></li>
+        </ul>
+        </nav>
+        <div class="toggle-switch">
+            <input class="toggle-input" id="toggle" type="checkbox">
+            <label class="toggle-label" for="toggle"></label>
+            </div>
+        <div class="user" id="user">
+        <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="profile">
+        <div class="back">
+            <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:black"></i>
+        </div>
+        <div class="userprofile">
+            <div class="user u">
+            <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="name"> </div>
+            <div class="email"> </div>
+            <br/>
+        </div>
+        
+        <a href="Motivation2.html" class="relax">
+            <div class="relaxnav"></div>
+            <div class="relaxcont"> Switch to <br/> Relax Mode </div>
+        </a>
+      <a href="homepage.html" class="logout"> Logout </a>
+    </div>
+  </header>
+
+
+
+
+    <div class="container">
+        <h1>Fill up your details</h1>
+        
+        <div class="form-container">
+            <h2>Personal Information</h2>
+            
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Profile URL</label>
+                <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+            </div>
+            
+            <div class="form-group">
+                <label for="github">GitHub Profile URL</label>
+                <input type="url" id="github" placeholder="https://github.com/yourusername">
+            </div>
+            
+            
+            <div id="photoPreviewContainer">
+                <img id="photoPreview" style="display:none; max-width: 150px;" />
+            </div>
+            <input type="file" id="photoInput" accept="image/*">
+
+            
+            <div class="form-group" style="display: none;">
+                <label for="title">Professional Title</label>
+                <input type="text" id="title" placeholder="e.g. Software Developer, Web Designer, etc.">
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">📄</span> Profile Summary</h3>
+                <div class="form-group">
+                    <textarea id="summary" placeholder="Write a brief summary about yourself, your skills, and what you're looking for"></textarea>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🎓</span> Education</h3>
+                <div id="education-container">
+                    <div class="education-item">
+                        <div class="form-group">
+                            <label for="education-degree-0">Degree</label>
+                            <select id="education-degree-0">
+                                <option value="10th">10th Grade</option>
+                                <option value="12th">12th Grade</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="phd">PhD</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="education-institution-0">Institution Name</label>
+                            <input type="text" id="education-institution-0" placeholder="Enter school/college name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="education-grade-0">Grade/Percentage/CGPA</label>
+                            <input type="text" id="education-grade-0" placeholder="e.g. 95%, 9.2 CGPA, etc.">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="education-year-0">Year of Completion</label>
+                            <input type="text" id="education-year-0" placeholder="e.g. 2015-2016">
+                        </div>
+                    </div>
+                </div>
+                <button id="add-education" class="add-btn">+ Add Education</button>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🛠️</span> Skills</h3>
+                <div class="skills-container">
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="HTML"> HTML
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="CSS"> CSS
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="JavaScript"> JavaScript
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Python"> Python
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Java"> Java
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="C"> C
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="C++"> C++
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="C#"> C#
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="PHP"> PHP
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Ruby"> Ruby
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Go"> Go
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Swift"> Swift
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Kotlin"> Kotlin
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="SQL"> SQL
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="React"> React
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Angular"> Angular
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Vue"> Vue
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Node.js"> Node.js
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Express"> Express
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Django"> Django
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Flask"> Flask
+                    </label>
+                    
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Spring"> Spring
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Git"> Git
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Docker"> Docker
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="AWS"> AWS
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Azure"> Azure
+                    </label>
+                    
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Linux"> Linux
+                    </label>
+                    <label class="skill-checkbox">
+                        <input type="checkbox" name="skills" value="Bash"> Bash
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="other-skills">Other Skills (comma separated)</label>
+                    <input type="text" id="other-skills" placeholder="e.g. Photoshop, Figma, AutoCAD, etc.">
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">💼</span> Professional Experience</h3>
+                <div id="experience-container">
+                    <div class="experience-item">
+                        <div class="form-group">
+                            <label for="experience-role-0">Role/Position</label>
+                            <input type="text" id="experience-role-0" placeholder="e.g. Software Developer Intern">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience-company-0">Company Name</label>
+                            <input type="text" id="experience-company-0" placeholder="Enter company name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience-duration-0">Duration</label>
+                            <input type="text" id="experience-duration-0" placeholder="e.g. June 2020 - August 2020">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience-desc-0">Description</label>
+                            <textarea id="experience-desc-0" placeholder="Describe your responsibilities and achievements"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-experience" class="add-btn">+ Add Experience</button>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🚀</span> Projects</h3>
+                <div id="project-container">
+                    <div class="project-item">
+                        <div class="form-group">
+                            <label for="project-name-0">Project Name</label>
+                            <input type="text" id="project-name-0" placeholder="Enter project name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project-link-0">Project Link (if any)</label>
+                            <input type="url" id="project-link-0" placeholder="https://example.com/project">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project-desc-0">Description</label>
+                            <textarea id="project-desc-0" placeholder="Describe the project and your contributions"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project-tech-0">Technologies Used</label>
+                            <input type="text" id="project-tech-0" placeholder="e.g. React, Node.js, MongoDB">
+                        </div>
+                    </div>
+                </div>
+                <button id="add-project" class="add-btn">+ Add Project</button>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🏅</span> Certificates</h3>
+                <div id="certificate-container">
+                    <div class="certificate-item">
+                        <div class="form-group">
+                            <label for="certificate-name-0">Certificate Name</label>
+                            <input type="text" id="certificate-name-0" placeholder="Enter certificate name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="certificate-issuer-0">Issuing Organization</label>
+                            <input type="text" id="certificate-issuer-0" placeholder="e.g. Coursera, Udemy">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="certificate-date-0">Date Obtained</label>
+                            <input type="text" id="certificate-date-0" placeholder="e.g. May 2020">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="certificate-link-0">Certificate Link (if any)</label>
+                            <input type="url" id="certificate-link-0" placeholder="https://example.com/certificate">
+                        </div>
+                    </div>
+                </div>
+                <button id="add-certificate" class="add-btn">+ Add Certificate</button>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🏆</span> Academic Achievements</h3>
+                <div id="achievement-container">
+                    <div class="achievement-item">
+                        <div class="form-group">
+                            <label for="achievement-title-0">Achievement Title</label>
+                            <input type="text" id="achievement-title-0" placeholder="e.g. Gold Medalist, Topper">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="achievement-description-0">Description</label>
+                            <textarea id="achievement-description-0" placeholder="Describe your achievement"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="achievement-year-0">Year</label>
+                            <input type="text" id="achievement-year-0" placeholder="e.g. 2022">
+                        </div>
+                    </div>
+                </div>
+                <button id="add-achievement" class="add-btn">+ Add Achievement</button>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🗣️</span> Languages Known</h3>
+                <div class="form-group">
+                    <div class="skills-container">
+                        <label class="skill-checkbox">
+                            <input type="checkbox" name="languages" value="English"> English
+                        </label>
+                        <label class="skill-checkbox">
+                            <input type="checkbox" name="languages" value="Hindi"> Hindi
+                        </label>
+                        <label class="skill-checkbox">
+                            <input type="checkbox" name="languages" value="Spanish"> Spanish
+                        </label>
+                        <label class="skill-checkbox">
+                            <input type="checkbox" name="languages" value="French"> French
+                        </label>
+                        <label class="skill-checkbox">
+                            <input type="checkbox" name="languages" value="German"> German
+                        </label>
+                        <label class="skill-checkbox">
+                            <input type="checkbox" name="languages" value="Other"> Other
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title"><span class="icon">🎨</span> Hobbies</h3>
+                <div class="form-group">
+                    <textarea id="hobbies" placeholder="List your hobbies separated by commas"></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title"><span class="icon">👨‍💻</span> Coding Profiles</h3>
+                <div class="form-group">
+                    <label for="leetcode">LeetCode Profile URL</label>
+                    <input type="url" id="leetcode" placeholder="https://leetcode.com/yourprofile">
+                </div>
+                
+                <div class="form-group">
+                    <label for="leetcode-solved">LeetCode Problems Solved</label>
+                    <input type="text" id="leetcode-solved" placeholder="Number of problems solved">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codechef">CodeChef Profile URL</label>
+                    <input type="url" id="codechef" placeholder="https://www.codechef.com/users/yourprofile">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codechef-solved">CodeChef Problems Solved</label>
+                    <input type="text" id="codechef-solved" placeholder="Number of problems solved">
+                </div>
+                
+                <div class="form-group">
+                    <label for="geeksforgeeks">GeeksforGeeks Profile URL</label>
+                    <input type="url" id="geeksforgeeks" placeholder="https://auth.geeksforgeeks.org/user/yourprofile">
+                </div>
+                
+                <div class="form-group">
+                    <label for="geeksforgeeks-solved">GeeksforGeeks Problems Solved</label>
+                    <input type="text" id="geeksforgeeks-solved" placeholder="Number of problems solved">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codeforces">Codeforces Profile URL</label>
+                    <input type="url" id="codeforces" placeholder="https://codeforces.com/profile/yourprofile">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codeforces-solved">Codeforces Problems Solved</label>
+                    <input type="text" id="codeforces-solved" placeholder="Number of problems solved">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hackerrank">HackerRank Profile URL</label>
+                    <input type="url" id="hackerrank" placeholder="https://www.hackerrank.com/yourprofile">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hackerrank-solved">HackerRank Problems Solved</label>
+                    <input type="text" id="hackerrank-solved" placeholder="Number of problems solved">
+                </div>
+            </div>
+            
+            <div class="action-btns">
+                <button type="submit" id="save-btn" class="save-btn">Save Data</button>
+                 <a href="portfolioPreview.html" target="_blank"><button class="preview-btn">Preview Portfolio</button></a>
+            </div>
+        </div>
+    </div>
+    
+
+    <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p> &copy; 2025 <span style="color:#E82166;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+<script>
+    displayUserInfo('username', 'email');
+    function displayUserInfo(usernameId, emailId) {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            window.location.href = 'login.html';
+            return;
+        }else{
+            if (usernameId) document.getElementsByClassName('name')[0].innerText = user.username;
+            if (emailId) document.getElementsByClassName('email')[0].innerText = user.email;
+            if (usernameId) document.getElementsByClassName('welcomeuser')[0].innerText = user.username;
+        }
+    }
+</script>
+<script >
+    function reload(){
+    document.getElementsByTagName("header")[0].style = "transform:translateY(0px)";}
+
+function Fix() {
+    var header = document.getElementById("Header");
+    var sticky = header.offsetTop;
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
+
+
+function toggleMenu() {
+  const nav = document.querySelector("nav");
+  nav.classList.toggle("active");
+}
+
+</script>
+    <script src="portfolioForm.js"></script>
+    <script src="homepage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("toggle");
+
+      // Step 1: Set toggle based on mode
+      const currentPage = window.location.pathname;
+      if (currentPage.includes("Motivation2.html")) {
+        localStorage.setItem("relaxMode", "true");
+        toggle.checked = true;
+      } else if (currentPage.includes("bookshelf.html")) {
+        localStorage.setItem("relaxMode", "false");
+        toggle.checked = false;
+      }
+
+      // Step 2: When toggle changes, redirect
+      toggle.addEventListener("change", function () {
+        if (this.checked) {
+          window.location.href = "Motivation2.html";
+        } else {
+          window.location.href = "bookshelf.html";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FunFacts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="funfacts2.css">
+  <link rel="stylesheet" href="./motivation2abc.css">
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header>
+    <div class="logo-placeholder">
+        <img src="./Images/logo.png"/>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+    <nav id="navMenu">
+      <a href="./Motivation2.html" >Motivation</a>
+      <a href="#" class="active">Fun-Facts</a>
+      <a href="Jokes.html">Jokes</a>
+      <a href="./loading_page.html">Games</a>
+      <a href="./music_page.html">Music</a>
+    </nav>
+
+    <div class="toggle-switch">
+      <input class="toggle-input" id="toggle" type="checkbox">
+      <label class="toggle-label" for="toggle"></label>
+    </div>
+
+    <div class="profile-icon" id="user">
+      <i class="fa-solid fa-circle-user" style="color: #8CDCE4;"></i>
+    </div>
+
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+    </div>
+
+
+
+    <div class="profile">
+      <div class="back">
+        <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:white"></i>
+      </div>
+      <div class="userprofile">
+        <div class="user u">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="name"> </div>
+        <div class="email"> </div>
+        <br/>
+      </div>
+      
+      <a href="mainpage.html" class="relax">
+        <div class="relaxnav"></div>
+        <div class="relaxcont"> Switch to <br/> Study Mode </div>
+      </a>
+      <a href="homepage.html" class="logout"> Logout </a>
+    </div>
+  </header>
+
+
+    <div id="sidebar" class="sidebar">
+  <span class="close-btn" onclick="toggleSidebar()">×</span>
+  <h2>Your Profile</h2>
+</div>
+
+
+
+  <h1>🌟 Fun Facts 🌟</h1>
+  <button onclick="showRandomFact()">🎲 Surprise Me!</button>
+
+  <div class="facts-container" id="factsContainer">
+    <!-- 40 Facts -->
+    <div class="fact">You can hear a blue whale's heartbeat from two miles away.</div>
+    <div class="fact">An ostrich's eye is bigger than its brain.</div>
+    <div class="fact">A jiffy is 1/100th of a second.</div>
+    <div class="fact">Wombat poop is cube-shaped.</div>
+    <div class="fact">Sloths can hold their breath longer than dolphins.</div>
+    <div class="fact">Bananas are berries, but strawberries aren't.</div>
+    <div class="fact">Octopuses have three hearts.</div>
+    <div class="fact">Cows have best friends and get stressed when separated.</div>
+    <div class="fact">Sharks existed before trees.</div>
+    <div class="fact">A snail can sleep for 3 years.</div>
+    <div class="fact">The Eiffel Tower grows 6 inches in summer.</div>
+    <div class="fact">Honey never spoils.</div>
+    <div class="fact">There are more stars in the universe than grains of sand on Earth.</div>
+    <div class="fact">A day on Venus is longer than a year.</div>
+    <div class="fact">Butterflies taste with their feet.</div>
+    <div class="fact">A group of flamingos is called a flamboyance.</div>
+    <div class="fact">Coca-Cola was the first soft drink in space.</div>
+    <div class="fact">The inventor of the frisbee was turned into a frisbee after death.</div>
+    <div class="fact">Pigeons can tell the difference between Picasso and Monet.</div>
+    <div class="fact">Giraffes have no vocal cords.</div>
+    <div class="fact">It's impossible to hum while holding your nose.</div>
+    <div class="fact">The first alarm clock could only ring at 4 a.m.</div>
+    <div class="fact">Mantis shrimp can punch with the speed of a bullet.</div>
+    <div class="fact">You can’t fold paper in half more than 7 times... usually.</div>
+    <div class="fact">There's a basketball court on the top floor of the US Supreme Court.</div>
+    <div class="fact">Elephants can’t jump.</div>
+    <div class="fact">Tigers have striped skin, not just striped fur.</div>
+    <div class="fact">Hot water freezes faster than cold water – called the Mpemba effect.</div>
+    <div class="fact">Penguins propose to their mates with pebbles.</div>
+    <div class="fact">Cows have almost 360-degree vision.</div>
+    <div class="fact">Koalas sleep up to 22 hours a day.</div>
+    <div class="fact">Bees can recognize human faces.</div>
+    <div class="fact">The moon has moonquakes.</div>
+    <div class="fact">Antarctica has only one ATM.</div>
+    <div class="fact">Oxford University is older than the Aztec Empire.</div>
+    <div class="fact">A crocodile can’t stick its tongue out.</div>
+    <div class="fact">The word "nerd" was first used by Dr. Seuss.</div>
+    <div class="fact">Some cats are allergic to humans.</div>
+    <div class="fact">The average person walks the equivalent of 5 times around the Earth in their lifetime.</div>
+    <div class="fact">There’s a species of jellyfish that is biologically immortal.</div>
+    <div class="fact">Lobsters taste with their feet.</div>
+  </div>
+
+    <button id="toggleFactsBtn" onclick="toggleFacts()">Show More</button>
+
+  <!-- Modal -->
+  <div class="modal" id="factModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <p id="randomFactText">This is a fun fact!</p>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email:&nbsp;support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p style="font-family: 'Segoe UI', sans-serif;"> &copy; 2025 <span style="color:#E82166;font-family: 'Segoe UI', sans-serif;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+
+
+  <script>
+    const facts = document.querySelectorAll(".fact");
+    const modal = document.getElementById("factModal");
+    const randomFactText = document.getElementById("randomFactText");
+
+    function showRandomFact() {
+  const index = Math.floor(Math.random() * facts.length);
+  const fact = facts[index].textContent;
+  randomFactText.textContent = fact;
+  modal.style.display = "flex";
+
+  // Stop any current speech
+  speechSynthesis.cancel();
+
+  // Speak the fact
+  const utterance = new SpeechSynthesisUtterance(fact);
+  utterance.lang = 'en-US'; // Set language if needed
+  speechSynthesis.speak(utterance);
+}
+
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+    function toggleMenu() {
+    const nav = document.getElementById("navMenu");
+    nav.classList.toggle("show");
+    }
+
+      let expanded = false;
+  const toggleBtn = document.getElementById("toggleFactsBtn");
+  const allFacts = document.querySelectorAll("#factsContainer .fact");
+
+  allFacts.forEach((fact, index) => {
+    if (index >= 12) {
+      fact.classList.add("hidden");
+    }
+  });
+
+  function toggleFacts() {
+    expanded = !expanded;
+    allFacts.forEach((fact, index) => {
+      if (index >= 12) {
+        fact.classList.toggle("hidden", !expanded);
+      }
+    });
+    toggleBtn.textContent = expanded ? "Show Less" : "Show More";
+  }
+
+    window.addEventListener("click", function (e) {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+
+ function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
+  }
+function toggleMenu() {
+      const nav = document.getElementById("navMenu");
+      nav.classList.toggle("show");
+
+    }
+
+
+function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  nav.classList.toggle("show");
+
+  // ✅ Add/remove class on <body> when menu is toggled
+  if (nav.classList.contains("show")) {
+    document.body.classList.add("menu-open");
+  } else {
+    document.body.classList.remove("menu-open");
+  }
+}
+const userIcon = document.getElementById('user');
+const sidebar = document.getElementsByClassName('profile')[0];
+const closeArrow = document.getElementsByClassName('back')[0];
+
+userIcon.addEventListener('click', () => {
+    sidebar.classList.add('hidden10');
+});
+
+closeArrow.addEventListener('click', () => {
+    sidebar.classList.remove('hidden10');
+});
+
+document.addEventListener('click', (e) => {
+    if (
+    !sidebar.contains(e.target) && 
+    !userIcon.contains(e.target)
+    ) {
+    sidebar.classList.remove('hidden10');
+    }
+});
+displayUserInfo('username', 'email');
+function displayUserInfo(usernameId, emailId) {
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) {
+    window.location.href = 'login.html';
+    return;
+  }else{
+    if (usernameId) document.getElementsByClassName('name')[0].innerText = user.username;
+    if (emailId) document.getElementsByClassName('email')[0].innerText = user.email;
+    if (usernameId) document.getElementsByClassName('welcomeuser')[0].innerText = user.username;
+  }
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("toggle");
+
+  // Step 1: Set toggle based on mode
+  const currentPage = window.location.pathname;
+  if (currentPage.includes("Motivation2.html")) {
+    localStorage.setItem("relaxMode", "true");
+    toggle.checked = true;
+  } else if (currentPage.includes("funfacts2.html")) {
+    localStorage.setItem("relaxMode", "false");
+    toggle.checked = false;
+  }
+
+  // Step 2: When toggle changes, redirect
+  toggle.addEventListener("change", function () {
+    if (this.checked) {
+      window.location.href = "./mainpage.html";
+    } else {
+      window.location.href = "funfacts2.html";
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>

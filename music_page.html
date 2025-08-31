@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Music Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./motivation2abc.css">
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="/Images/logo2.jpg" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    body {
+      background-image: linear-gradient(to left, #7819a1, #305e96);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .music-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
+
+    .music-card {
+      height: 100px;
+      background: #2b2b3f;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s;
+      position: relative;
+      box-shadow: 0 0 10px #0005;
+    }
+
+    .music-card:hover {
+      transform: scale(1.05);
+      background: #3d3d5c;
+    }
+
+    .music-card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .music-card.playing::after {
+      content: "⏸️ Playing...";
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #0f0;
+      font-size: 14px;
+    }
+
+    audio {
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .music-card h2 {
+        font-size: 16px;
+      }
+    }
+    header {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(to left, #952455, #292160);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-placeholder {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.logo-placeholder img {
+  height: 50px;
+  object-fit: contain;
+}
+
+
+nav {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+nav a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    border: 2px solid #ffffff;
+}
+
+.profile-icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 42px;
+
+}
+.profile-icon:hover{
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-icon a{
+    text-decoration: none;
+    color: white;
+    /* cursor: pointer; */
+    border-radius: 100%;
+    transition: all 0.3s ease;
+}
+
+body.menu-open .profile-icon {
+  display: none;
+}
+
+
+
+/* Sidebar Styling */
+.user{
+  width:50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:50%;
+  background-color: #8CDCE4;
+  color:#9D3A67;  
+  margin:0 0 0 15rem;
+  font-size: 18px;
+}
+
+.user:hover{
+  background-color: #77c6cd;
+}
+
+.profile{
+  position: fixed;
+  right:3%;
+  width:300px;
+  height: 350px;
+  border-radius:5px;
+  margin:1rem 0 0 75.6rem;
+  display: flex;
+  flex-direction: column;
+  top:10%;
+  background-color: #292160;
+  border:0.5px solid #1e1845;
+  transition: all 0.2s;
+  z-index:9999;
+  box-shadow: 0 0 2px 2px #1e1845;
+  opacity:0;
+  transform: translateY(10px);
+}
+
+.hidden10{
+  top:10%;
+  opacity:1;
+  transform: translateY(0);
+}
+
+.userprofile{
+  margin:7.5px;
+  border-radius: 5px;
+  background-color: #b34b7a;
+  color:white;
+}
+
+.u{
+  margin:10px 0 0 0px;
+}
+
+.name, .email{
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  color:white;
+}
+
+.name{
+  margin:10px 0 0 0;
+}
+
+.email{
+  margin:0 0 0 25px;
+}
+
+.relax{
+  height: 70px;
+  display: flex;
+  margin:1rem 0 0 0;
+  text-decoration: none;
+  color:black;
+  border-bottom:3px solid #994269;
+  border-radius: 10px;
+}
+
+.relaxnav{
+  width:60px;
+  height: 60px;
+   background-image: url('/Images/study1.jpg');
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  border: 3px solid rgb(199, 199, 199);
+  margin:0 0 0 1.5rem
+}
+
+.relaxcont{
+  display: flex;
+  align-items: center;
+  margin:0 0 0 2rem;
+  color:white;
+}
+
+.relax:hover{
+  background-color: #be6e92;
+}
+
+.logout{
+  width:120px;
+  height:50px;
+  cursor: pointer;
+  color:white;
+  font-weight: bold;
+  font-size:17px;
+  border-radius: 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:all 0.5s;
+  background-color: #6eb7be;
+  margin:1.5rem 0 0 1.5rem;
+}
+
+.logout:hover{
+  box-shadow: 0 10px 15px rgb(110, 188, 195);
+  border-radius: 5px;
+}
+
+
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 910px) {
+    .hamburger {
+    display: block;
+    }
+
+    nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    }
+
+    nav.show {
+    display: flex;
+    }
+
+    nav a {
+    padding: 10px 0;
+    width: 100%;
+    }
+}
+
+/* Footer */
+footer{
+  width:100%;
+  height:300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.des {
+  width:100%;
+  height:80%;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #1a1e1f;
+  border-bottom:2px solid #2d3434;
+  display: flex;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.copy{
+  height:20%;
+  width:100%;
+  background-color:#242a2d;
+  color:white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sec{
+  width:33.3%;
+  height:100%;
+  color:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+} 
+
+.f1{
+  margin:3rem 0 0 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footerhead{
+  color:white;
+  font-size: 20px;
+  font-weight: 500px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.fh{
+  margin:5rem 0 0 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footercont{
+  width:200px;
+  height:70%;
+  margin:1rem 0 0 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  text-decoration: none;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.fcont{
+  color:rgb(175, 175, 175);
+  font-size: 16px;
+  text-decoration: none;
+  line-height: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.fcont:hover{
+  color: #ffe3ed;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo1{
+  width:200px;
+  height:100px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logocont{
+  font-size: 16px;
+  margin:-1rem 0 0 0;
+  color:rgb(175, 175, 175);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.icons{
+  margin:1rem 0 0 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.fa-brands:hover{
+  box-shadow: 0 0 5px 5px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes float {
+  0%   { 
+    transform: translateY(0); 
+  }
+  50%  { 
+    transform: translateY(-20px); 
+  }
+  100% { 
+    transform: translateY(0); 
+  }
+}
+
+.float {
+  animation: float 2s ease-in-out infinite;
+}
+
+
+@media (max-width: 500px) {
+
+  footer {
+    height: auto;
+    padding: 1.5rem 0;
+  }
+
+  .des {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .sec {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+
+  .logo1 {
+    width: 140px;
+    height: 70px;
+  }
+
+  .logocont {
+    font-size: 13px;
+    margin-top: 0.4rem;
+  }
+
+  .footerhead {
+    font-size: 17px;
+    margin-top: 0.8rem;
+  }
+
+  .footercont {
+    width: auto;
+    align-items: center;
+  }
+
+  .fcont {
+    font-size: 13px;
+    margin-bottom: 0.4rem;
+  }
+
+  .icons {
+    margin-top: 0.8rem;
+  }
+
+}
+
+@media (max-width: 360px) {
+ 
+
+  .footercont, .logocont {
+    font-size: 14px;
+  }
+
+  .footerhead {
+    font-size: 16px;
+  }
+
+  .copy p {
+    font-size: 12px;
+  }
+
+  .logo1 {
+    width: 150px;
+    height: auto;
+  }
+}
+
+
+/* Toggle */
+.toggle-switch {
+  position: relative;
+  width: 40px;
+  height: 24px;
+  margin: 10px;
+}
+
+.toggle-switch .toggle-input {
+  display: none;
+}
+
+
+.toggle-switch .toggle-label {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 70px;
+  height: 30px;
+  background-color: #F5E1D8;
+  background-image: url(./Images/study_toggle.jpg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.toggle-switch .toggle-label::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  top: 2px;
+  left: 5px;
+  background-color: white;
+  background-image: url(/Images/relax_toggle.png);
+  background-position: center;
+  background-size: contain;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+  </style>
+</head>
+<body>
+
+ <header>
+    <div class="logo-placeholder">
+        <img src="./Images/logo.png"/>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+    <nav id="navMenu">
+      <a href="./Motivation2.html" ">Motivation</a>
+      <a href="funfacts2.html">Fun-Facts</a>
+      <a href="Jokes.html">Jokes</a>
+      <a href="./loading_page.html">Games</a>
+      <a href="music_page.html" class="active">Music</a>
+      <!-- <div class="mobile-profile">
+        <span>Profile</span>
+      </div> -->
+    </nav>
+
+    <!-- <div class="profile-icon" >
+       <a href="./mainpage.html" >Back to Study</a> 
+    </div> -->
+
+
+    <div class="toggle-switch">
+      <input class="toggle-input" id="toggle" type="checkbox">
+      <label class="toggle-label" for="toggle"></label>
+    </div>
+
+    <div class="profile-icon" id="user">
+      <i class="fa-solid fa-circle-user" style="color: #8CDCE4;"></i>
+    </div>
+
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="profile">
+      <div class="back">
+        <i class="fa-solid fa-arrow-left" style="cursor: pointer;color:white"></i>
+      </div>
+      <div class="userprofile">
+        <div class="user u">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="name"> </div>
+        <div class="email"> </div>
+        <br/>
+      </div>
+      
+      <a href="mainpage.html" class="relax">
+        <div class="relaxnav"></div>
+        <div class="relaxcont"> Switch to <br/> Study Mode </div>
+      </a>
+      <a href="homepage.html" class="logout"> Logout </a>
+    </div>
+  </header>
+
+
+   <h1>🎧 Music 🎧</h1>
+  <div class="music-grid" style="margin:-1rem 0 0 0">
+    <div class="music-card" data-audio="./Images/audio1.mp3">
+      <h2>Chill Vibes</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio2.mp3">
+      <h2>Retro Beat</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio3.mp3">
+      <h2>Adventure Mood</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio4.mp3">
+      <h2>Lo-fi Night</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio5.mp3">
+      <h2>Chill Vibes</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio6.mp3">
+      <h2>Retro Beat</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio7.mp3">
+      <h2>Adventure Mood</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio8.mp3">
+      <h2>Lo-fi Night</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio5.mp3">
+      <h2>Chill Vibes</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio6.mp3">
+      <h2>Retro Beat</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio7.mp3">
+      <h2>Adventure Mood</h2>
+    </div>
+    <div class="music-card" data-audio="./Images/audio8.mp3">
+      <h2>Lo-fi Night</h2>
+    </div>
+  </div>
+
+    <footer>
+    <div class="des">
+      <div class="sec">
+        <img src="/Images/logo.png"class="logo1"/>
+        <div class="logocont"> Your comprehensive learning companion <br/> for academic success. </div>
+      </div>
+      <div class="sec">
+        <div class="f1 footerhead fh">Contact Us</div>
+        <div class="footercont">
+          <a href="#" class="fcont">
+            Call: +91 75 13 59 75 75 
+          </a>
+          <a href="#" class="fcont">
+            Email: support@learnoha.io
+          </a>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="footerhead">Our Social Media</div>
+        <div class="icons">
+          <i class="fa-brands fa-linkedin" style="color:#0077B5;font-size:25px;"></i>
+          <i class="fa-brands fa-youtube" style="color:#FF0000;font-size:25px;"></i>
+          <i class="fa-brands fa-square-facebook" style="color:#1877F2;font-size:25px;"></i>
+          <i class="fa-brands fa-square-instagram" style="color:#E4405F;font-size:25px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <p style="font-family: 'Segoe UI', sans-serif;"> &copy; 2025 <span style="color:#E82166;font-family: 'Segoe UI', sans-serif;">Learnoha</span>. All rights reserved. </p>
+    </div>
+  </footer>
+  <script>
+
+
+
+    const cards = document.querySelectorAll(".music-card");
+    let currentAudio = null;
+    let currentCard = null;
+
+    cards.forEach(card => {
+      const audioSrc = card.getAttribute("data-audio");
+      const audio = new Audio(audioSrc);
+
+      card.addEventListener("click", () => {
+        // Stop previous
+        if (currentAudio && currentAudio !== audio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+          currentCard?.classList.remove("playing");
+        }
+
+        // Play or pause current
+        if (audio.paused) {
+          audio.play();
+          card.classList.add("playing");
+          currentAudio = audio;
+          currentCard = card;
+        } else {
+          audio.pause();
+          card.classList.remove("playing");
+          currentAudio = null;
+          currentCard = null;
+        }
+      });
+
+      // Remove "playing" when track ends
+      audio.addEventListener("ended", () => {
+        card.classList.remove("playing");
+        if (currentAudio === audio) {
+          currentAudio = null;
+          currentCard = null;
+        }
+      });
+    });
+
+
+    function toggleMenu() {
+      const nav = document.getElementById("navMenu");
+      nav.classList.toggle("show");
+
+    }
+
+
+
+    function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  nav.classList.toggle("show");
+
+  // ✅ Add/remove class on <body> when menu is toggled
+  if (nav.classList.contains("show")) {
+    document.body.classList.add("menu-open");
+  } else {
+    document.body.classList.remove("menu-open");
+  }
+}
+
+
+
+    const userIcon = document.getElementById('user');
+const sidebar = document.getElementsByClassName('profile')[0];
+const closeArrow = document.getElementsByClassName('back')[0];
+
+userIcon.addEventListener('click', () => {
+    sidebar.classList.add('hidden10');
+});
+
+closeArrow.addEventListener('click', () => {
+    sidebar.classList.remove('hidden10');
+});
+
+document.addEventListener('click', (e) => {
+    if (
+    !sidebar.contains(e.target) && 
+    !userIcon.contains(e.target)
+    ) {
+    sidebar.classList.remove('hidden10');
+    }
+});
+displayUserInfo('username', 'email');
+function displayUserInfo(usernameId, emailId) {
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) {
+    window.location.href = 'login.html';
+    return;
+  }else{
+    if (usernameId) document.getElementsByClassName('name')[0].innerText = user.username;
+    if (emailId) document.getElementsByClassName('email')[0].innerText = user.email;
+    if (usernameId) document.getElementsByClassName('welcomeuser')[0].innerText = user.username;
+  }
+}
+
+
+
+
+  </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("toggle");
+
+  // Step 1: Set toggle based on mode
+  const currentPage = window.location.pathname;
+  if (currentPage.includes("Motivation2.html")) {
+    localStorage.setItem("relaxMode", "true");
+    toggle.checked = true;
+  } else if (currentPage.includes("music_page.html")) {
+    localStorage.setItem("relaxMode", "false");
+    toggle.checked = false;
+  }
+
+  // Step 2: When toggle changes, redirect
+  toggle.addEventListener("change", function () {
+    if (this.checked) {
+      window.location.href = "./mainpage.html";
+    } else {
+      window.location.href = "./music_page.html";
+    }
+  });
+});
+</script>
+
+
+</body>
+</html>
